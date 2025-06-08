@@ -1,0 +1,44 @@
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import TabNavigator from './TabNavigator';
+import CharacterDetailScreen from '../screens/CharacterDetail';
+import EpisodeDetailScreen from '../screens/EpisodeDetail';
+
+export interface DetailScreenRouteParams {
+  id?: string;
+  name?: string;
+  price?: string;
+  description?: string;
+}
+
+export type RootStackParamList = {
+  TabNavigator: undefined; // TabNavigator no tiene parámetros
+  CharacterDetail: undefined; // DetailScreenRouteParams; // Parámetros que espera la pantalla CharacterDetail
+  EpisodeDetail: undefined; // DetailScreenRouteParams; // Parámetros que espera la pantalla EpisodeDetail
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const screenOptions = {
+  headerBackImage: () => null,
+  headerLeftContainerStyle: {},
+  headerShown: false,
+  headerTitle: () => null,
+  headerStyle: {},
+};
+
+export default function Navigation() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={screenOptions}>
+        <Stack.Screen name="TabNavigator" component={TabNavigator} />
+        <Stack.Screen
+          name="CharacterDetail"
+          component={CharacterDetailScreen}
+        />
+        <Stack.Screen name="EpisodeDetail" component={EpisodeDetailScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
