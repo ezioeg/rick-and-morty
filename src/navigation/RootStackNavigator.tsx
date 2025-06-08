@@ -13,9 +13,9 @@ export interface DetailScreenRouteParams {
 }
 
 export type RootStackParamList = {
-  TabNavigator: undefined; // TabNavigator no tiene parámetros
-  CharacterDetail: undefined; // DetailScreenRouteParams; // Parámetros que espera la pantalla CharacterDetail
-  EpisodeDetail: undefined; // DetailScreenRouteParams; // Parámetros que espera la pantalla EpisodeDetail
+  TabNavigator: undefined;
+  CharacterDetail: {id: string};
+  EpisodeDetail: {id: string};
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

@@ -6,10 +6,16 @@ import {
   ActivityIndicator,
   StyleSheet,
   Image,
+  TouchableOpacity,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../navigation/RootStackNavigator';
 import {useCharacters} from '../../graphql/hooks/useCharacters';
 
 function CharacterListScreen() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const {data, loading, error} = useCharacters(1);
 
   if (loading) {
@@ -37,13 +43,18 @@ function CharacterListScreen() {
         data={characters}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
-          <View style={styles.item}>
-            <Image source={{uri: item.image}} style={styles.image} />
-            <View style={styles.textContainer}>
-              <Text style={styles.name}>{item.name}</Text>
-              <Text style={styles.species}>{item.species}</Text>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('CharacterDetail', {id: item.id})
+            }>
+            <View style={styles.item}>
+              <Image source={{uri: item.image}} style={styles.image} />
+              <View style={styles.textContainer}>
+                <Text style={styles.name}>{item.name}</Text>
+                <Text style={styles.species}>{item.species}</Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>

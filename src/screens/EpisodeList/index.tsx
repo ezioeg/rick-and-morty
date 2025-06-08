@@ -5,10 +5,17 @@ import {
   FlatList,
   ActivityIndicator,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../navigation/RootStackNavigator';
 import {useEpisodes} from '../../graphql/hooks/useEpisodes';
 
 function EpisodeListScreen() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const {data, loading, error} = useEpisodes(1);
 
   if (loading) {
@@ -36,10 +43,13 @@ function EpisodeListScreen() {
         data={episodes}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
-          <View style={styles.item}>
-            <Text style={styles.title}>{item.name}</Text>
-            <Text style={styles.airDate}>{item.air_date}</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}>
+            <View style={styles.item}>
+              <Text style={styles.title}>{item.name}</Text>
+              <Text style={styles.airDate}>{item.air_date}</Text>
+            </View>
+          </TouchableOpacity>
         )}
       />
     </View>
