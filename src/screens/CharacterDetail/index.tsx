@@ -126,8 +126,8 @@ const styles = StyleSheet.create({
   episodeItem: {
     marginTop: 8,
     padding: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#555',
   },
   episodeTitle: {
     fontWeight: 'bold',

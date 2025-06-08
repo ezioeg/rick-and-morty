@@ -113,8 +113,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 8,
     paddingVertical: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#555',
   },
   image: {
     width: 60,

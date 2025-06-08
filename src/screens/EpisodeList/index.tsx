@@ -70,14 +70,14 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     padding: 12,
     borderRadius: 8,
-    backgroundColor: '#f2f2f2',
+    // backgroundColor: '#f2f2f2',
   },
   title: {
     fontWeight: 'bold',
     fontSize: 16,
   },
   airDate: {
-    color: '#777',
+    color: '#555',
   },
 });
 
