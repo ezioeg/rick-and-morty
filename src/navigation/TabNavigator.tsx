@@ -21,14 +21,14 @@ export default function TabNavigator() {
         name="CharacterList"
         component={CharacterListScreen}
         options={{
-          tabBarIcon: ({color, size}) => <HomeIcon size={size} color={color} />,
+          tabBarIcon: HomeIcon,
         }}
       />
       <Tab.Screen
         name="EpisodeList"
         component={EpisodeListScreen}
         options={{
-          tabBarIcon: ({color, size}) => <HomeIcon size={size} color={color} />,
+          tabBarIcon: HomeIcon,
         }}
       />
     </Tab.Navigator>
