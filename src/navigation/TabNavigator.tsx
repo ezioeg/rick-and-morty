@@ -2,7 +2,8 @@ import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CharacterListScreen from '../screens/CharacterList';
 import EpisodeListScreen from '../screens/EpisodeList';
-import HomeIcon from '../assets/icons';
+import CharactersIcon from '../assets/icons/CharactersIcon';
+import EpisodesIcon from '../assets/icons/EpisodesIcon';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,14 +22,14 @@ export default function TabNavigator() {
         name="CharacterList"
         component={CharacterListScreen}
         options={{
-          tabBarIcon: HomeIcon,
+          tabBarIcon: CharactersIcon,
         }}
       />
       <Tab.Screen
         name="EpisodeList"
         component={EpisodeListScreen}
         options={{
-          tabBarIcon: HomeIcon,
+          tabBarIcon: EpisodesIcon,
         }}
       />
     </Tab.Navigator>

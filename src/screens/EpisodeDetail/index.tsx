@@ -11,6 +11,7 @@ import {
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/RootStackNavigator';
 import {useEpisodeById} from '../../graphql/hooks/useEpisodeById';
+import Header from '../../components/Header';
 
 type EpisodeDetailRouteProp = RouteProp<RootStackParamList, 'EpisodeDetail'>;
 
@@ -24,7 +25,7 @@ function EpisodeDetailScreen() {
     return (
       <View style={styles.center}>
         <ActivityIndicator size="large" />
-        <Text>Cargando episodio...</Text>
+        <Text>Loading episode...</Text>
       </View>
     );
   }
@@ -32,7 +33,7 @@ function EpisodeDetailScreen() {
   if (error) {
     return (
       <View style={styles.center}>
-        <Text>Error al cargar episodio: {error.message}</Text>
+        <Text>Error loading episode: {error.message}</Text>
       </View>
     );
   }
@@ -42,25 +43,29 @@ function EpisodeDetailScreen() {
   if (!episode) {
     return (
       <View style={styles.center}>
-        <Text>Episodio no encontrado</Text>
+        <Text>Episode not found</Text>
       </View>
     );
   }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>{episode.name}</Text>
+      <Header
+        title={episode.name}
+        showBackButton={true}
+        showRightIcon={false}
+      />
 
       <Text style={styles.label}>
-        Fecha de emisión: <Text style={styles.value}>{episode.air_date}</Text>
+        Air date: <Text style={styles.value}>{episode.air_date}</Text>
       </Text>
 
       <Text style={styles.label}>
-        Código del episodio: <Text style={styles.value}>{episode.episode}</Text>
+        Episode code: <Text style={styles.value}>{episode.episode}</Text>
       </Text>
 
       <Text style={styles.subtitle}>
-        Personajes que aparecen en el episodio:
+        Characters that appear in the episode:
       </Text>
       <FlatList
         data={episode.characters}
@@ -82,8 +87,8 @@ function EpisodeDetailScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
-    paddingBottom: 32,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
   },
   center: {
     flex: 1,
@@ -91,7 +96,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 12,
     textAlign: 'center',
@@ -104,17 +109,19 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
   },
   subtitle: {
-    marginTop: 16,
+    marginTop: 12,
     fontSize: 18,
     fontWeight: 'bold',
   },
   characterItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 8,
-    paddingVertical: 8,
+    justifyContent: 'center',
+    padding: 16,
+    paddingVertical: 12,
     borderBottomWidth: 0.5,
     borderBottomColor: '#555',
+    backgroundColor: '#f2f2f2',
   },
   image: {
     width: 60,

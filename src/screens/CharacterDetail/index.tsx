@@ -11,6 +11,7 @@ import {
 import {RouteProp, useRoute} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/RootStackNavigator';
 import {useCharacterById} from '../../graphql/hooks/useCharacterById';
+import Header from '../../components/Header';
 
 type CharacterDetailRouteProp = RouteProp<
   RootStackParamList,
@@ -27,7 +28,7 @@ function CharacterDetailScreen() {
     return (
       <View style={styles.center}>
         <ActivityIndicator size="large" />
-        <Text>Cargando personaje...</Text>
+        <Text>Loading character...</Text>
       </View>
     );
   }
@@ -35,7 +36,7 @@ function CharacterDetailScreen() {
   if (error) {
     return (
       <View style={styles.center}>
-        <Text>Error al cargar personaje: {error.message}</Text>
+        <Text>Error loading character: {error.message}</Text>
       </View>
     );
   }
@@ -45,34 +46,38 @@ function CharacterDetailScreen() {
   if (!character) {
     return (
       <View style={styles.center}>
-        <Text>Personaje no encontrado</Text>
+        <Text>Character not found</Text>
       </View>
     );
   }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>{character.name}</Text>
+      <Header
+        title={character.name}
+        showBackButton={true}
+        showRightIcon={false}
+      />
       <Image source={{uri: character.image}} style={styles.image} />
 
       <Text style={styles.label}>
-        Especie: <Text style={styles.value}>{character.species}</Text>
+        Species: <Text style={styles.value}>{character.species}</Text>
       </Text>
       <Text style={styles.label}>
-        Género: <Text style={styles.value}>{character.gender}</Text>
+        Gender: <Text style={styles.value}>{character.gender}</Text>
       </Text>
       <Text style={styles.label}>
-        Estado: <Text style={styles.value}>{character.status}</Text>
+        Status: <Text style={styles.value}>{character.status}</Text>
       </Text>
 
       <Text style={styles.label}>
-        Ubicación:{' '}
+        Location:{' '}
         <Text style={styles.value}>
           {character.location.name} - {character.location.type}
         </Text>
       </Text>
 
-      <Text style={styles.subtitle}>Episodios en los que ha aparecido:</Text>
+      <Text style={styles.subtitle}>Episodes in which he has appeared:</Text>
       <FlatList
         data={character.episode}
         keyExtractor={ep => ep.id}
@@ -90,8 +95,8 @@ function CharacterDetailScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
-    paddingBottom: 32,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
   },
   center: {
     flex: 1,
@@ -99,7 +104,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 12,
     textAlign: 'center',
@@ -109,7 +114,7 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 8,
     alignSelf: 'center',
-    marginBottom: 20,
+    marginBottom: 16,
   },
   label: {
     fontWeight: 'bold',
@@ -124,8 +129,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   episodeItem: {
-    marginTop: 8,
-    padding: 8,
+    padding: 16,
     borderBottomWidth: 0.5,
     borderBottomColor: '#555',
   },

@@ -12,6 +12,8 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../navigation/RootStackNavigator';
 import {useCharacters} from '../../graphql/hooks/useCharacters';
+import Header from '../../components/Header';
+import SearchCharacterIcon from '../../assets/icons/SearchCharacterIcon';
 
 function CharacterListScreen() {
   const navigation =
@@ -22,7 +24,7 @@ function CharacterListScreen() {
     return (
       <View style={styles.center}>
         <ActivityIndicator size="large" />
-        <Text>Cargando personajes...</Text>
+        <Text>Characters loading...</Text>
       </View>
     );
   }
@@ -30,7 +32,7 @@ function CharacterListScreen() {
   if (error) {
     return (
       <View style={styles.center}>
-        <Text>Error al cargar personajes: {error.message}</Text>
+        <Text>Error loading characters: {error.message}</Text>
       </View>
     );
   }
@@ -39,6 +41,12 @@ function CharacterListScreen() {
 
   return (
     <View style={styles.container}>
+      <Header
+        title="Characters"
+        showBackButton={false}
+        showRightIcon={true}
+        RightIconComponent={SearchCharacterIcon}
+      />
       <FlatList
         data={characters}
         keyExtractor={item => item.id}
@@ -64,7 +72,7 @@ function CharacterListScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    paddingHorizontal: 16,
   },
   center: {
     flex: 1,
@@ -74,7 +82,7 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 16,
   },
   image: {
     width: 60,
@@ -86,6 +94,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   name: {
+    fontSize: 18,
     fontWeight: 'bold',
   },
   species: {

@@ -11,6 +11,8 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../navigation/RootStackNavigator';
 import {useEpisodes} from '../../graphql/hooks/useEpisodes';
+import Header from '../../components/Header';
+import SearchEpisodeIcon from '../../assets/icons/SearchEpisodeIcon';
 
 function EpisodeListScreen() {
   const navigation =
@@ -22,7 +24,7 @@ function EpisodeListScreen() {
     return (
       <View style={styles.center}>
         <ActivityIndicator size="large" />
-        <Text>Cargando episodios...</Text>
+        <Text>Loading episodes...</Text>
       </View>
     );
   }
@@ -30,7 +32,7 @@ function EpisodeListScreen() {
   if (error) {
     return (
       <View style={styles.center}>
-        <Text>Error al cargar episodios: {error.message}</Text>
+        <Text>Error loading episodes: {error.message}</Text>
       </View>
     );
   }
@@ -39,6 +41,12 @@ function EpisodeListScreen() {
 
   return (
     <View style={styles.container}>
+      <Header
+        title="Episodes"
+        showBackButton={false}
+        showRightIcon={true}
+        RightIconComponent={SearchEpisodeIcon}
+      />
       <FlatList
         data={episodes}
         keyExtractor={item => item.id}
@@ -59,7 +67,7 @@ function EpisodeListScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    paddingHorizontal: 16,
   },
   center: {
     flex: 1,
@@ -67,14 +75,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   item: {
-    marginBottom: 12,
-    padding: 12,
+    marginBottom: 16,
     borderRadius: 8,
-    // backgroundColor: '#f2f2f2',
+    backgroundColor: '#f2f2f2',
   },
   title: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18,
   },
   airDate: {
     color: '#555',
