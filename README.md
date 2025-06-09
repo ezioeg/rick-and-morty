@@ -113,6 +113,8 @@ To run unit tests:
 ```bash
 npm run test
 ```
+> **Note**  
+> Most important components have dedicated unit tests using **Jest** and **React Native Testing Library**.
 
 ## Contributions
 Contributions are welcome. If you wish to improve the project, please fork it and submit a pull request.
