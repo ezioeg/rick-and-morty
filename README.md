@@ -60,7 +60,8 @@ RickAndMorty App is a technical test using React Native CLI. The goal is to crea
 - [Jest](https://jestjs.io/)
 - [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)
 
-## Install dependencies
+## Setup
+Install dependencies:
 ```bash
 # Using npm
 npm install
@@ -69,7 +70,8 @@ npm install
 yarn install
    ```
 
-## Start metro
+## Run
+Start metro:
 ```sh
 # Using npm
 npm start
@@ -78,8 +80,7 @@ npm start
 yarn start
 ```
 
-##  Build and run your app
-### Android
+### Build and run for Android
 
 ```sh
 # Using npm
@@ -89,7 +90,7 @@ npm run android
 yarn android
 ```
 
-### iOS
+### Build and run for iOS
 Before running on iOS for the first time, make sure to install CocoaPods dependencies:
 ```bash
 cd ios
