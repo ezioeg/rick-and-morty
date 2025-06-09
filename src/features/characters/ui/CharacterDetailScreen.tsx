@@ -8,18 +8,16 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../navigation/RootStackNavigator';
-import {useCharacterById} from '../hooks/graphql';
+import {useCharacterById} from '../services/graphql';
 import Header from '../../../shared/components/Header';
 import Loader from '../../../shared/components/Loader';
 import ErrorMessage from '../../../shared/components/ErrorMessage';
-
-type CharacterDetailRouteProp = RouteProp<
+import {
   RootStackParamList,
-  'CharacterDetail'
->;
+  CharacterDetailRouteProp,
+} from '../../../shared/types/RootStackParamListTypes';
 
 function CharacterDetailScreen() {
   const navigation =

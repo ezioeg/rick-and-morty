@@ -2,13 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {BackArrowIcon} from '../../shared/components/icons';
-
-interface HeaderProps {
-  title: string;
-  showBackButton?: boolean;
-  showRightIcon?: boolean;
-  RightIconComponent?: React.ComponentType<{size: number; color: string}>;
-}
+import {HeaderProps} from '../../shared/types/HeaderTypes';
 
 const Header = ({
   title,

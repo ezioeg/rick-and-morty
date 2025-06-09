@@ -12,8 +12,24 @@ const GET_EPISODES = gql`
   }
 `;
 
+interface Episode {
+  id: string;
+  name: string;
+  air_date: string;
+}
+
+interface GetEpisodesResponse {
+  episodes: {
+    results: Episode[];
+  };
+}
+
+interface GetEpisodesVariables {
+  page: number;
+}
+
 export const useEpisodes = (page: number = 1) => {
-  return useQuery(GET_EPISODES, {
+  return useQuery<GetEpisodesResponse, GetEpisodesVariables>(GET_EPISODES, {
     variables: {page},
   });
 };

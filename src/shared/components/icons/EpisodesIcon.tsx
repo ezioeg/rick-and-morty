@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Svg, {Path} from 'react-native-svg';
+import {IconProps} from '../../types/IconTypes';
 
-function EpisodesIcon({size, color}: {size: number; color: string}) {
+function EpisodesIcon({size, color}: IconProps) {
   return (
     <Svg
       width={size}

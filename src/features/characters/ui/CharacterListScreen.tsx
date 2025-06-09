@@ -9,12 +9,12 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../navigation/RootStackNavigator';
-import {useCharacters} from '../hooks/graphql/useCharacters';
+import {useCharacters} from '../services/graphql';
 import Header from '../../../shared/components/Header';
 import {SearchCharacterIcon} from '../../../shared/components/icons';
 import Loader from '../../../shared/components/Loader';
 import ErrorMessage from '../../../shared/components/ErrorMessage';
+import {RootStackParamList} from '../../../shared/types/RootStackParamListTypes';
 
 function CharacterListScreen() {
   const navigation =

@@ -2,12 +2,12 @@ import React from 'react';
 import {View, Text, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../navigation/RootStackNavigator';
-import {useEpisodes} from '../hooks/graphql/useEpisodes';
+import {useEpisodes} from '../services/graphql';
 import Header from '../../../shared/components/Header';
 import {SearchEpisodeIcon} from '../../../shared/components/icons';
 import Loader from '../../../shared/components/Loader';
 import ErrorMessage from '../../../shared/components/ErrorMessage';
+import {RootStackParamList} from '../../../shared/types/RootStackParamListTypes';
 
 function EpisodeListScreen() {
   const navigation =

@@ -1,0 +1,40 @@
+import {gql, useQuery} from '@apollo/client';
+
+const GET_CHARACTERS = gql`
+  query GetCharacters($page: Int!) {
+    characters(page: $page) {
+      results {
+        id
+        image
+        name
+        species
+      }
+    }
+  }
+`;
+
+interface Character {
+  id: string;
+  image: string;
+  name: string;
+  species: string;
+}
+
+interface GetCharactersResponse {
+  characters: {
+    results: Character[];
+  };
+}
+
+interface GetCharactersVariables {
+  page: number;
+}
+
+export const useCharacters = (page: number = 1) => {
+  return useQuery<GetCharactersResponse, GetCharactersVariables>(
+    GET_CHARACTERS,
+    {
+      variables: {page},
+    },
+  );
+};

@@ -4,19 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
 import CharacterDetailScreen from '../features/characters/ui/CharacterDetailScreen';
 import EpisodeDetailScreen from '../features/episodes/ui/EpisodeDetailScreen';
-
-export interface DetailScreenRouteParams {
-  id?: string;
-  name?: string;
-  price?: string;
-  description?: string;
-}
-
-export type RootStackParamList = {
-  TabNavigator: undefined;
-  CharacterDetail: {id: string};
-  EpisodeDetail: {id: string};
-};
+import {RootStackParamList} from '../shared/types/RootStackParamListTypes';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

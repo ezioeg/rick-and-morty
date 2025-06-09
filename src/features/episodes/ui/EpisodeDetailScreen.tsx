@@ -8,15 +8,16 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../../navigation/RootStackNavigator';
-import {useEpisodeById} from '../hooks/graphql/useEpisodeById';
+import {useEpisodeById} from '../services/graphql';
 import Header from '../../../shared/components/Header';
 import Loader from '../../../shared/components/Loader';
 import ErrorMessage from '../../../shared/components/ErrorMessage';
-
-type EpisodeDetailRouteProp = RouteProp<RootStackParamList, 'EpisodeDetail'>;
+import {
+  RootStackParamList,
+  EpisodeDetailRouteProp,
+} from '../../../shared/types/RootStackParamListTypes';
 
 function EpisodeDetailScreen() {
   const navigation =
