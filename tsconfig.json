@@ -8,7 +8,8 @@
       "@features/*": ["features/*"],
       "@shared/*": ["shared/*"],
       "@theme": ["theme"],
-      "@theme/*": ["theme/*"]
+      "@theme/*": ["theme/*"],
+      "@env": ["shared/types/env"]
     }
   }
 }

@@ -5,7 +5,7 @@ import {currentTheme} from '@theme';
 const Loader = ({message = 'Loading...'}) => (
   <View style={styles.center}>
     <ActivityIndicator size="large" />
-    <Text>{message}</Text>
+    <Text style={styles.text}>{message}</Text>
   </View>
 );
 
@@ -15,6 +15,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: currentTheme.colors.background,
+  },
+  text: {
+    color: currentTheme.colors.textPrimary,
+    fontSize: currentTheme.typography.subtitle,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 

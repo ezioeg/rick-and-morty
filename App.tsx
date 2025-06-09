@@ -10,7 +10,7 @@ import {currentTheme} from '@theme';
 
 function App() {
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <GestureHandlerRootView style={styles.safeArea}>
       <ApolloProvider client={client}>
         <SafeAreaProvider>
           <SafeAreaView style={styles.safeArea} edges={['top']}>
