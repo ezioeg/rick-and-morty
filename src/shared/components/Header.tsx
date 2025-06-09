@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {BackArrowIcon} from '../../shared/components/icons';
-import {HeaderProps} from '../../shared/types/HeaderTypes';
-import {currentTheme} from '../../theme';
+import {BackArrowIcon} from '@shared/components/icons';
+import {HeaderProps} from '@shared/types/HeaderTypes';
+import {currentTheme} from '@theme';
 
 const Header = ({
   title,
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: currentTheme.spacing.lg,
     justifyContent: 'space-between',
+    backgroundColor: currentTheme.colors.background,
   },
   title: {
     flex: 1,

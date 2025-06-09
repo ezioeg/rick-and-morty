@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import CharacterListScreen from '../features/characters/ui/CharacterListScreen';
-import EpisodeListScreen from '../features/episodes/ui/EpisodeListScreen';
-import {CharactersIcon} from '../shared/components/icons';
-import {EpisodesIcon} from '../shared/components/icons';
-import {currentTheme} from '../theme';
+import CharacterListScreen from '@features/characters/ui/CharacterListScreen';
+import EpisodeListScreen from '@features/episodes/ui/EpisodeListScreen';
+import {CharactersIcon} from '@shared/components/icons';
+import {EpisodesIcon} from '@shared/components/icons';
+import {currentTheme} from '@theme';
 
 const Tab = createBottomTabNavigator();
 

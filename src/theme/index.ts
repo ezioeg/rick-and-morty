@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import {lightTheme, darkTheme, portalTheme, multiverseTheme} from './themes';
+import {multiverseTheme} from '@theme/themes';
 
 export const currentTheme = multiverseTheme;

@@ -10,15 +10,13 @@ import {
 } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useEpisodeById} from '../services/graphql';
-import Header from '../../../shared/components/Header';
-import Loader from '../../../shared/components/Loader';
-import ErrorMessage from '../../../shared/components/ErrorMessage';
+import {useEpisodeById} from '@features/episodes/services/graphql';
+import {Header, Loader, ErrorMessage} from '@shared/components';
 import {
   RootStackParamList,
   EpisodeDetailRouteProp,
-} from '../../../shared/types/RootStackParamListTypes';
-import {currentTheme} from '../../../theme';
+} from '@shared/types/RootStackParamListTypes';
+import {currentTheme} from '@theme';
 
 function EpisodeDetailScreen() {
   const navigation =

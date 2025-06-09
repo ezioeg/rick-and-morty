@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {currentTheme} from '@theme';
 
 const ErrorMessage = ({message}: {message: string}) => (
   <View style={styles.center}>
@@ -12,6 +13,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: currentTheme.colors.background,
   },
 });
 

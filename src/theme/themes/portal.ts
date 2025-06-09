@@ -1,6 +1,6 @@
-import {spacing} from '../base/spacing';
-import {typography} from '../base/typography';
-import {border} from '../base/border';
+import {spacing} from '@theme/base/spacing';
+import {typography} from '@theme/base/typography';
+import {border} from '@theme/base/border';
 
 export const portalTheme = {
   colors: {

@@ -2,9 +2,9 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
-import CharacterDetailScreen from '../features/characters/ui/CharacterDetailScreen';
-import EpisodeDetailScreen from '../features/episodes/ui/EpisodeDetailScreen';
-import {RootStackParamList} from '../shared/types/RootStackParamListTypes';
+import CharacterDetailScreen from '@features/characters/ui/CharacterDetailScreen';
+import EpisodeDetailScreen from '@features/episodes/ui/EpisodeDetailScreen';
+import {RootStackParamList} from '@shared/types/RootStackParamListTypes';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

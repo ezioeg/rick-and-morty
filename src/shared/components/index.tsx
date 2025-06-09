@@ -1,18 +1,3 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-
-const ErrorMessage = ({message}: {message: string}) => (
-  <View style={styles.center}>
-    <Text>Error: {message}</Text>
-  </View>
-);
-
-const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-
-export default ErrorMessage;
+export {default as Header} from './Header';
+export {default as Loader} from './Loader';
+export {default as ErrorMessage} from './ErrorMessage';
