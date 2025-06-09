@@ -1,18 +1,13 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  ActivityIndicator,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../navigation/RootStackNavigator';
-import {useEpisodes} from '../../graphql/hooks/useEpisodes';
-import Header from '../../components/Header';
-import SearchEpisodeIcon from '../../assets/icons/SearchEpisodeIcon';
+import {RootStackParamList} from '../../../navigation/RootStackNavigator';
+import {useEpisodes} from '../hooks/graphql/useEpisodes';
+import Header from '../../../shared/components/Header';
+import {SearchEpisodeIcon} from '../../../shared/components/icons';
+import Loader from '../../../shared/components/Loader';
+import ErrorMessage from '../../../shared/components/ErrorMessage';
 
 function EpisodeListScreen() {
   const navigation =
@@ -21,24 +16,14 @@ function EpisodeListScreen() {
   const {data, loading, error} = useEpisodes(1);
 
   if (loading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" />
-        <Text>Loading episodes...</Text>
-      </View>
-    );
+    return <Loader message="Loading episodes..." />;
   }
 
   if (error) {
-    return (
-      <View style={styles.center}>
-        <Text>Error loading episodes: {error.message}</Text>
-      </View>
-    );
+    return <ErrorMessage message="Error loading episodes" />;
   }
 
   const episodes = data?.episodes?.results ?? [];
-
   return (
     <View style={styles.container}>
       <Header
@@ -68,11 +53,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
-  },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   item: {
     marginBottom: 16,

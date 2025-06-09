@@ -3,17 +3,18 @@ import {
   View,
   Text,
   FlatList,
-  ActivityIndicator,
   StyleSheet,
   Image,
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../navigation/RootStackNavigator';
-import {useCharacters} from '../../graphql/hooks/useCharacters';
-import Header from '../../components/Header';
-import SearchCharacterIcon from '../../assets/icons/SearchCharacterIcon';
+import {RootStackParamList} from '../../../navigation/RootStackNavigator';
+import {useCharacters} from '../hooks/graphql/useCharacters';
+import Header from '../../../shared/components/Header';
+import {SearchCharacterIcon} from '../../../shared/components/icons';
+import Loader from '../../../shared/components/Loader';
+import ErrorMessage from '../../../shared/components/ErrorMessage';
 
 function CharacterListScreen() {
   const navigation =
@@ -21,20 +22,11 @@ function CharacterListScreen() {
   const {data, loading, error} = useCharacters(1);
 
   if (loading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" />
-        <Text>Characters loading...</Text>
-      </View>
-    );
+    return <Loader message="Loading characters..." />;
   }
 
   if (error) {
-    return (
-      <View style={styles.center}>
-        <Text>Error loading characters: {error.message}</Text>
-      </View>
-    );
+    return <ErrorMessage message="Error loading characters" />;
   }
 
   const characters = data?.characters?.results ?? [];
@@ -74,11 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
   },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+
   item: {
     flexDirection: 'row',
     alignItems: 'center',

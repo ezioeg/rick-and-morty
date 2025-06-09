@@ -4,7 +4,7 @@ import {StatusBar, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import {ApolloProvider} from '@apollo/client';
-import {client} from './src/apollo/client';
+import {client} from './src/services/apollo/client';
 import Navigation from './src/navigation/RootStackNavigator';
 
 function App() {

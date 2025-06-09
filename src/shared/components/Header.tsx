@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import BackArrowIcon from '../assets/icons/BackArrowIcon';
+import {BackArrowIcon} from '../../shared/components/icons';
 
 interface HeaderProps {
   title: string;

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import CharacterListScreen from '../screens/CharacterList';
-import EpisodeListScreen from '../screens/EpisodeList';
-import CharactersIcon from '../assets/icons/CharactersIcon';
-import EpisodesIcon from '../assets/icons/EpisodesIcon';
+import CharacterListScreen from '../features/characters/ui/CharacterListScreen';
+import EpisodeListScreen from '../features/episodes/ui/EpisodeListScreen';
+import {CharactersIcon} from '../shared/components/icons';
+import {EpisodesIcon} from '../shared/components/icons';
 
 const Tab = createBottomTabNavigator();
 

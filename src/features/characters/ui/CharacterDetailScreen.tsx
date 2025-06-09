@@ -5,13 +5,16 @@ import {
   View,
   Image,
   FlatList,
-  ActivityIndicator,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
-import {RouteProp, useRoute} from '@react-navigation/native';
-import {RootStackParamList} from '../../navigation/RootStackNavigator';
-import {useCharacterById} from '../../graphql/hooks/useCharacterById';
-import Header from '../../components/Header';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../../navigation/RootStackNavigator';
+import {useCharacterById} from '../hooks/graphql';
+import Header from '../../../shared/components/Header';
+import Loader from '../../../shared/components/Loader';
+import ErrorMessage from '../../../shared/components/ErrorMessage';
 
 type CharacterDetailRouteProp = RouteProp<
   RootStackParamList,
@@ -19,36 +22,24 @@ type CharacterDetailRouteProp = RouteProp<
 >;
 
 function CharacterDetailScreen() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const {params} = useRoute<CharacterDetailRouteProp>();
   const {id} = params;
 
   const {data, loading, error} = useCharacterById(id);
 
   if (loading) {
-    return (
-      <View style={styles.center}>
-        <ActivityIndicator size="large" />
-        <Text>Loading character...</Text>
-      </View>
-    );
+    return <Loader message="Loading character..." />;
   }
 
   if (error) {
-    return (
-      <View style={styles.center}>
-        <Text>Error loading character: {error.message}</Text>
-      </View>
-    );
+    return <ErrorMessage message="Error loading character" />;
   }
 
   const character = data?.character;
-
   if (!character) {
-    return (
-      <View style={styles.center}>
-        <Text>Character not found</Text>
-      </View>
-    );
+    return <ErrorMessage message="Character not found" />;
   }
 
   return (
@@ -82,10 +73,13 @@ function CharacterDetailScreen() {
         data={character.episode}
         keyExtractor={ep => ep.id}
         renderItem={({item}) => (
-          <View style={styles.episodeItem}>
-            <Text style={styles.episodeTitle}>{item.name}</Text>
-            <Text style={styles.episodeAirDate}>{item.air_date}</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}>
+            <View style={styles.episodeItem}>
+              <Text style={styles.episodeTitle}>{item.name}</Text>
+              <Text style={styles.episodeAirDate}>{item.air_date}</Text>
+            </View>
+          </TouchableOpacity>
         )}
         scrollEnabled={false} // para que no interfiera con el ScrollView principal
       />
@@ -97,17 +91,6 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     paddingBottom: 16,
-  },
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 12,
-    textAlign: 'center',
   },
   image: {
     width: 200,

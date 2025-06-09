@@ -2,8 +2,8 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
-import CharacterDetailScreen from '../screens/CharacterDetail';
-import EpisodeDetailScreen from '../screens/EpisodeDetail';
+import CharacterDetailScreen from '../features/characters/ui/CharacterDetailScreen';
+import EpisodeDetailScreen from '../features/episodes/ui/EpisodeDetailScreen';
 
 export interface DetailScreenRouteParams {
   id?: string;
