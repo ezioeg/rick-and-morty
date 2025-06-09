@@ -1,15 +1,75 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# RickAndMorty App
+RickAndMorty Explorer is a technical test using React Native CLI. The goal is to create an app that allows users to explore characters and episodes from the Rick and Morty series using the Rick and Morty GraphQL API.
 
-# Getting Started
+## Features
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+### Character List
 
-## Step 1: Start Metro
+- Paginated list of characters from the Rick and Morty universe.
+- Each item includes:
+  - Character image.
+  - Name.
+  - Species.
+- Filter options:
+  - **Name**: Alphabetical search by character name.
+  - **Species**: Filter by species with a reset option to show all.
+  - **Status**: Filter by status (Alive, Dead, Unknown), also with a reset option.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+### Character Detail
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- Displays detailed information about the selected character:
+  - Name
+  - Image
+  - Species
+  - Gender
+  - Status
+  - Last known location
+  - List of episodes where the character appears
 
+### Episode List
+
+- Scrollable list of episodes including:
+  - Episode name
+  - Air date
+
+### Episode Detail
+
+- Displays detailed information about the selected episode:
+  - Name
+  - Air date
+  - Episode code (e.g., S01E01)
+  - List of characters featured in the episode
+
+## Technologies Used
+### Core
+- [React Native](https://reactnative.dev/) `0.79.3`
+- [React](https://reactjs.org/) `v19.0.0`
+- [React Navigation Native](https://reactnavigation.org/docs/getting-started) `v7.1.10`
+- [React Navigation Native Stack](https://reactnavigation.org/docs/native-stack-navigator) `v7.3.14`
+- [React Navigation Bottom Tabs](https://reactnavigation.org/docs/bottom-tab-navigator) `v7.3.14`
+- [Apollo Client](https://www.apollographql.com/docs/react/) `v3.13.8`
+- [GraphQL](https://graphql.org/) `v16.11.0`
+
+### UI/Styling
+- [React Native Svg](https://github.com/react-native-svg/react-native-svg) `v15.12.0`
+
+### State Management
+- [Zustand](https://github.com/pmndrs/zustand)
+
+### Testing
+- [Jest](https://jestjs.io/)
+- [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)
+
+## Install dependencies
+```bash
+# Using npm
+npm install
+
+# OR using Yarn
+yarn install
+   ```
+
+## Start metro
 ```sh
 # Using npm
 npm start
@@ -18,10 +78,7 @@ npm start
 yarn start
 ```
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
+##  Build and run your app
 ### Android
 
 ```sh
@@ -33,65 +90,31 @@ yarn android
 ```
 
 ### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+Before running on iOS for the first time, make sure to install CocoaPods dependencies:
+```bash
+cd ios
+pod install
+cd ..
 ```
 
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+Then:
+```bash
+# using npm
 npm run ios
 
 # OR using Yarn
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Testing
+To run unit tests:
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```bash
+npm run test
+```
 
-## Step 3: Modify your app
+## Contributions
+Contributions are welcome. If you wish to improve the project, please fork it and submit a pull request.
 
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Contact
+For questions or suggestions, you can contact me at [ezioeg@gmail.com].
