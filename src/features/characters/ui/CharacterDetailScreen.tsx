@@ -18,6 +18,7 @@ import {
   RootStackParamList,
   CharacterDetailRouteProp,
 } from '../../../shared/types/RootStackParamListTypes';
+import {currentTheme} from '../../../theme';
 
 function CharacterDetailScreen() {
   const navigation =
@@ -41,7 +42,9 @@ function CharacterDetailScreen() {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView
+      style={{backgroundColor: currentTheme.colors.background}}
+      contentContainerStyle={styles.container}>
       <Header
         title={character.name}
         showBackButton={true}
@@ -87,38 +90,44 @@ function CharacterDetailScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
-    paddingBottom: 16,
+    flex: 1,
+    paddingHorizontal: currentTheme.spacing.lg,
+    paddingBottom: currentTheme.spacing.lg,
+    backgroundColor: currentTheme.colors.background,
   },
   image: {
     width: 200,
     height: 200,
-    borderRadius: 8,
+    borderRadius: currentTheme.border.radius,
     alignSelf: 'center',
-    marginBottom: 16,
+    marginBottom: currentTheme.spacing.lg,
   },
   label: {
     fontWeight: 'bold',
-    marginBottom: 4,
+    marginBottom: currentTheme.spacing.xs,
+    color: currentTheme.colors.textPrimary,
   },
   value: {
     fontWeight: 'normal',
+    color: currentTheme.colors.textSecondary,
   },
   subtitle: {
-    marginTop: 16,
-    fontSize: 18,
+    marginTop: currentTheme.spacing.lg,
+    fontSize: currentTheme.typography.subtitle,
     fontWeight: 'bold',
+    color: currentTheme.colors.textPrimary,
   },
   episodeItem: {
-    padding: 16,
+    padding: currentTheme.spacing.lg,
     borderBottomWidth: 0.5,
-    borderBottomColor: '#555',
+    borderBottomColor: currentTheme.colors.border,
   },
   episodeTitle: {
     fontWeight: 'bold',
+    color: currentTheme.colors.textPrimary,
   },
   episodeAirDate: {
-    color: '#555',
+    color: currentTheme.colors.textSecondary,
   },
 });
 

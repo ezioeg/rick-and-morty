@@ -8,6 +8,7 @@ import {SearchEpisodeIcon} from '../../../shared/components/icons';
 import Loader from '../../../shared/components/Loader';
 import ErrorMessage from '../../../shared/components/ErrorMessage';
 import {RootStackParamList} from '../../../shared/types/RootStackParamListTypes';
+import {currentTheme} from '../../../theme';
 
 function EpisodeListScreen() {
   const navigation =
@@ -52,19 +53,21 @@ function EpisodeListScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
+    paddingHorizontal: currentTheme.spacing.lg,
+    backgroundColor: currentTheme.colors.background,
   },
   item: {
-    marginBottom: 16,
-    borderRadius: 8,
-    backgroundColor: '#f2f2f2',
+    marginBottom: currentTheme.spacing.lg,
+    borderRadius: currentTheme.border.radius,
+    backgroundColor: currentTheme.colors.background,
   },
   title: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: currentTheme.typography.subtitle,
+    color: currentTheme.colors.textPrimary,
   },
   airDate: {
-    color: '#555',
+    color: currentTheme.colors.textSecondary,
   },
 });
 

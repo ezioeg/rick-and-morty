@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {BackArrowIcon} from '../../shared/components/icons';
 import {HeaderProps} from '../../shared/types/HeaderTypes';
+import {currentTheme} from '../../theme';
 
 const Header = ({
   title,
@@ -16,7 +17,7 @@ const Header = ({
     <View style={styles.container}>
       {showBackButton ? (
         <TouchableOpacity onPress={navigation.goBack}>
-          <BackArrowIcon size={24} color="black" />
+          <BackArrowIcon size={24} color={currentTheme.colors.textPrimary} />
         </TouchableOpacity>
       ) : (
         <View style={styles.placeholder} />
@@ -26,7 +27,10 @@ const Header = ({
 
       {showRightIcon && RightIconComponent ? (
         <TouchableOpacity onPress={() => {}}>
-          <RightIconComponent size={24} color="black" />
+          <RightIconComponent
+            size={24}
+            color={currentTheme.colors.textPrimary}
+          />
         </TouchableOpacity>
       ) : (
         <View style={styles.placeholder} />
@@ -40,17 +44,18 @@ const styles = StyleSheet.create({
     height: 56,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
+    paddingHorizontal: currentTheme.spacing.lg,
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
     flex: 1,
+    fontSize: currentTheme.typography.title,
+    color: currentTheme.colors.textPrimary,
+    fontWeight: 'bold',
     textAlign: 'center',
   },
   button: {
-    fontSize: 20,
+    fontSize: currentTheme.typography.title,
   },
   placeholder: {
     width: 32, // Ancho para alinear con el botón

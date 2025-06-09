@@ -18,6 +18,7 @@ import {
   RootStackParamList,
   EpisodeDetailRouteProp,
 } from '../../../shared/types/RootStackParamListTypes';
+import {currentTheme} from '../../../theme';
 
 function EpisodeDetailScreen() {
   const navigation =
@@ -41,7 +42,9 @@ function EpisodeDetailScreen() {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView
+      style={{backgroundColor: currentTheme.colors.background}}
+      contentContainerStyle={styles.container}>
       <Header
         title={episode.name}
         showBackButton={true}
@@ -84,45 +87,51 @@ function EpisodeDetailScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
-    paddingBottom: 16,
+    flex: 1,
+    paddingHorizontal: currentTheme.spacing.lg,
+    paddingBottom: currentTheme.spacing.lg,
+    backgroundColor: currentTheme.colors.background,
   },
   label: {
     fontWeight: 'bold',
-    marginBottom: 4,
+    marginBottom: currentTheme.spacing.xs,
+    color: currentTheme.colors.textPrimary,
   },
   value: {
     fontWeight: 'normal',
+    color: currentTheme.colors.textSecondary,
   },
   subtitle: {
-    marginTop: 12,
-    fontSize: 18,
+    marginTop: currentTheme.spacing.md,
+    fontSize: currentTheme.typography.subtitle,
+    color: currentTheme.colors.textPrimary,
     fontWeight: 'bold',
   },
   characterItem: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 16,
-    paddingVertical: 12,
+    padding: currentTheme.spacing.lg,
+    paddingVertical: currentTheme.spacing.md,
     borderBottomWidth: 0.5,
-    borderBottomColor: '#555',
-    backgroundColor: '#f2f2f2',
+    borderBottomColor: currentTheme.colors.border,
+    backgroundColor: currentTheme.colors.background,
   },
   image: {
     width: 60,
     height: 60,
-    borderRadius: 8,
-    marginRight: 12,
+    borderRadius: currentTheme.border.radius,
+    marginRight: currentTheme.spacing.md,
   },
   characterInfo: {
     flex: 1,
   },
   characterName: {
     fontWeight: 'bold',
+    color: currentTheme.colors.textPrimary,
   },
   characterSpecies: {
-    color: '#555',
+    color: currentTheme.colors.textSecondary,
   },
 });
 

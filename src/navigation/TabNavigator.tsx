@@ -4,12 +4,17 @@ import CharacterListScreen from '../features/characters/ui/CharacterListScreen';
 import EpisodeListScreen from '../features/episodes/ui/EpisodeListScreen';
 import {CharactersIcon} from '../shared/components/icons';
 import {EpisodesIcon} from '../shared/components/icons';
+import {currentTheme} from '../theme';
 
 const Tab = createBottomTabNavigator();
 
 const screenOptions = {
   headerShown: false,
-  tabBarStyle: {},
+  tabBarStyle: {
+    backgroundColor: currentTheme.colors.background,
+  },
+  tabBarActiveTintColor: currentTheme.colors.textPrimary,
+  tabBarInactiveTintColor: currentTheme.colors.textSecondary,
   tabBarShowLabel: false,
 };
 

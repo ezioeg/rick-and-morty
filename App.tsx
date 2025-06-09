@@ -6,6 +6,7 @@ import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import {ApolloProvider} from '@apollo/client';
 import {client} from './src/services/apollo/client';
 import Navigation from './src/navigation/RootStackNavigator';
+import {currentTheme} from './src/theme';
 
 function App() {
   return (
@@ -13,7 +14,10 @@ function App() {
       <ApolloProvider client={client}>
         <SafeAreaProvider>
           <SafeAreaView style={styles.safeArea} edges={['top']}>
-            <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
+            <StatusBar
+              barStyle={currentTheme.statusBarStyle}
+              backgroundColor={currentTheme.colors.background}
+            />
             <Navigation />
           </SafeAreaView>
         </SafeAreaProvider>
@@ -25,7 +29,7 @@ function App() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: currentTheme.colors.background,
   },
 });
 

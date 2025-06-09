@@ -15,6 +15,7 @@ import {SearchCharacterIcon} from '../../../shared/components/icons';
 import Loader from '../../../shared/components/Loader';
 import ErrorMessage from '../../../shared/components/ErrorMessage';
 import {RootStackParamList} from '../../../shared/types/RootStackParamListTypes';
+import {currentTheme} from '../../../theme';
 
 function CharacterListScreen() {
   const navigation =
@@ -64,29 +65,31 @@ function CharacterListScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
+    paddingHorizontal: currentTheme.spacing.lg,
+    backgroundColor: currentTheme.colors.background,
   },
 
   item: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: currentTheme.spacing.lg,
   },
   image: {
     width: 60,
     height: 60,
-    borderRadius: 8,
-    marginRight: 12,
+    borderRadius: currentTheme.border.radius,
+    marginRight: currentTheme.spacing.md,
   },
   textContainer: {
     flex: 1,
   },
   name: {
-    fontSize: 18,
+    fontSize: currentTheme.typography.subtitle,
     fontWeight: 'bold',
+    color: currentTheme.colors.textPrimary,
   },
   species: {
-    color: '#555',
+    color: currentTheme.colors.textSecondary,
   },
 });
 
