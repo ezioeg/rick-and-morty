@@ -2,7 +2,12 @@
     "characterList": {
       "title": "Characters",
       "loading": "Loading characters...",
-      "error": "Error loading characters"
+      "error": "Error loading characters",
+      "filtersTitle": "Character Filters",
+      "filterByName": "Filter by name",
+      "filterResetButton": "Reset",
+      "filterApplyButton": "Apply",
+      "filterCloseButton": "Close"
     },
     "characterDetail": {
       "notFound": "Character not found",

@@ -18,6 +18,7 @@ const GET_CHARACTER_BY_ID = gql`
         id
         name
         air_date
+        episode
       }
     }
   }
@@ -33,6 +34,7 @@ interface Episode {
   id: string;
   name: string;
   air_date: string;
+  episode: string;
 }
 
 interface CharacterDetail {

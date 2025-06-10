@@ -10,6 +10,7 @@ const GET_EPISODES = gql`
         id
         name
         air_date
+        episode
       }
     }
   }
@@ -19,6 +20,7 @@ export interface Episode {
   id: string;
   name: string;
   air_date: string;
+  episode: string;
 }
 
 interface GetEpisodesResponse {

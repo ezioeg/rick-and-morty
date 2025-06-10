@@ -2,7 +2,12 @@
     "characterList": {
       "title": "Personajes",
       "loading": "Cargando personajes...",
-      "error": "Error al cargar personajes"
+      "error": "Error al cargar personajes",
+      "filtersTitle": "Filtros de personajes",
+      "filterByName": "Filtrar por nombre",
+      "filterResetButton": "Resetear",
+      "filterApplyButton": "Aplicar",
+      "filterCloseButton": "Cerrar"
     },
     "characterDetail": {
       "notFound": "Personaje no encontrado",

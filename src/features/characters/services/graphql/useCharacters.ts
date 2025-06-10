@@ -42,6 +42,7 @@ export const useCharacters = (page: number = 1) => {
     {
       variables: {page},
       notifyOnNetworkStatusChange: true, // Permite mostrar loading cuando haces fetchMore
+      fetchPolicy: 'cache-first',
     },
   );
 };
