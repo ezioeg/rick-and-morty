@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -8,22 +8,65 @@ import {Header, Loader, ErrorMessage} from '@shared/components';
 import {RootStackParamList} from '@shared/types/RootStackParamListTypes';
 import {currentTheme} from '@theme';
 import {useTranslation} from 'react-i18next';
+import {Episode} from '@features/episodes/services/graphql/useEpisodes';
 
 function EpisodeListScreen() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const {data, loading, error} = useEpisodes(1);
   const {t} = useTranslation();
 
-  if (loading) {
+  // Estado para acumular episodios y para paginación
+  const [episodes, setEpisodes] = useState<Episode[]>([]);
+  const [nextPage, setNextPage] = useState<number | null>(2);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
+
+  // Comienza la consulta en la página 1
+  const {data, loading, error, fetchMore} = useEpisodes(1);
+
+  useEffect(() => {
+    if (data?.episodes?.results) {
+      // Al cargar la primera página, se inicializa el estado
+      setEpisodes(data.episodes.results);
+      setNextPage(data.episodes.info?.next);
+    }
+  }, [data]);
+
+  const handleLoadMore = async () => {
+    // Si no hay más páginas o ya se está cargando, se retorna
+    if (!nextPage || isFetchingMore) {
+      return;
+    }
+
+    setIsFetchingMore(true);
+    try {
+      const {data: moreData} = await fetchMore({
+        variables: {page: nextPage},
+      });
+      const newResults = moreData?.episodes?.results || [];
+      const newNext = moreData?.episodes?.info?.next;
+
+      // Evitar duplicados por ID
+      setEpisodes(prev => {
+        const existingIds = new Set(prev.map(e => e.id));
+        const filteredNew = newResults.filter(e => !existingIds.has(e.id));
+        return [...prev, ...filteredNew];
+      });
+
+      setNextPage(newNext);
+    } catch (e) {
+      console.error('Failed to fetch more episodes', e);
+    }
+    setIsFetchingMore(false);
+  };
+
+  if (loading && episodes.length === 0) {
     return <Loader message={t('episodeList.loading')} />;
   }
 
-  if (error) {
+  if (error && episodes.length === 0) {
     return <ErrorMessage message={t('episodeList.error')} />;
   }
 
-  const episodes = data?.episodes?.results ?? [];
   return (
     <View style={styles.container}>
       <Header
@@ -34,7 +77,7 @@ function EpisodeListScreen() {
       />
       <FlatList
         data={episodes}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           <TouchableOpacity
             onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}>
@@ -44,11 +87,13 @@ function EpisodeListScreen() {
             </View>
           </TouchableOpacity>
         )}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={isFetchingMore ? <Loader /> : null}
       />
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

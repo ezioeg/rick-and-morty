@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -15,22 +15,57 @@ import {SearchCharacterIcon} from '@shared/components/icons';
 import {RootStackParamList} from '@shared/types/RootStackParamListTypes';
 import {currentTheme} from '@theme';
 import {useTranslation} from 'react-i18next';
+import {Character} from '@features/characters/services/graphql/useCharacters';
 
 function CharacterListScreen() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const {data, loading, error} = useCharacters(1);
   const {t} = useTranslation();
 
-  if (loading) {
+  const {data, loading, error, fetchMore} = useCharacters(1);
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const [nextPage, setNextPage] = useState<number | null>(2);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
+
+  useEffect(() => {
+    if (data?.characters?.results) {
+      setCharacters(data.characters.results);
+      setNextPage(data.characters.info?.next);
+    }
+  }, [data]);
+
+  const handleLoadMore = async () => {
+    if (!nextPage || isFetchingMore) {
+      return;
+    }
+
+    setIsFetchingMore(true);
+    try {
+      const {data: moreData} = await fetchMore({variables: {page: nextPage}});
+      const newResults = moreData?.characters?.results || [];
+      const newNext = moreData?.characters?.info?.next;
+
+      // Evitar duplicados por ID
+      setCharacters(prev => {
+        const existingIds = new Set(prev.map(c => c.id));
+        const filteredNew = newResults.filter(c => !existingIds.has(c.id));
+        return [...prev, ...filteredNew];
+      });
+
+      setNextPage(newNext);
+    } catch (e) {
+      console.error('Failed to fetch more characters', e);
+    }
+    setIsFetchingMore(false);
+  };
+
+  if (loading && characters.length === 0) {
     return <Loader message={t('characterList.loading')} />;
   }
 
-  if (error) {
+  if (error && characters.length === 0) {
     return <ErrorMessage message={t('characterList.error')} />;
   }
-
-  const characters = data?.characters?.results ?? [];
 
   return (
     <View style={styles.container}>
@@ -42,7 +77,7 @@ function CharacterListScreen() {
       />
       <FlatList
         data={characters}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           <TouchableOpacity
             onPress={() =>
@@ -57,6 +92,9 @@ function CharacterListScreen() {
             </View>
           </TouchableOpacity>
         )}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={isFetchingMore ? <Loader /> : null}
       />
     </View>
   );

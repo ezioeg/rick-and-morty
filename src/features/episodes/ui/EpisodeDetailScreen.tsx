@@ -5,7 +5,6 @@ import {
   View,
   Image,
   FlatList,
-  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -41,46 +40,50 @@ function EpisodeDetailScreen() {
   }
 
   return (
-    <ScrollView
-      style={{backgroundColor: currentTheme.colors.background}}
-      contentContainerStyle={styles.container}>
-      <Header
-        title={episode.name}
-        showBackButton={true}
-        showRightIcon={false}
-      />
+    <FlatList
+      ListHeaderComponent={
+        <View style={styles.container}>
+          <Header
+            title={episode.name}
+            showBackButton={true}
+            showRightIcon={false}
+          />
 
-      <Text style={styles.label}>
-        {t('episodeDetail.airDate')}:{' '}
-        <Text style={styles.value}>{episode.air_date}</Text>
-      </Text>
+          <Text style={styles.label}>
+            {t('episodeDetail.airDate')}:{' '}
+            <Text style={styles.value}>{episode.air_date}</Text>
+          </Text>
 
-      <Text style={styles.label}>
-        {t('episodeDetail.episodeCode')}:{' '}
-        <Text style={styles.value}>{episode.episode}</Text>
-      </Text>
+          <Text style={styles.label}>
+            {t('episodeDetail.episodeCode')}:{' '}
+            <Text style={styles.value}>{episode.episode}</Text>
+          </Text>
 
-      <Text style={styles.subtitle}>{t('episodeDetail.charactersTitle')}</Text>
-      <FlatList
-        data={episode.characters}
-        keyExtractor={item => item.id}
-        scrollEnabled={false}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('CharacterDetail', {id: item.id})
-            }>
-            <View style={styles.characterItem}>
-              <Image source={{uri: item.image}} style={styles.image} />
-              <View style={styles.characterInfo}>
-                <Text style={styles.characterName}>{item.name}</Text>
-                <Text style={styles.characterSpecies}>{item.species}</Text>
-              </View>
+          <Text style={styles.subtitle}>
+            {t('episodeDetail.charactersTitle')}
+          </Text>
+        </View>
+      }
+      data={episode.characters}
+      keyExtractor={item => item.id}
+      renderItem={({item}) => (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('CharacterDetail', {id: item.id})}>
+          <View style={styles.characterItem}>
+            <Image source={{uri: item.image}} style={styles.image} />
+            <View style={styles.characterInfo}>
+              <Text style={styles.characterName}>{item.name}</Text>
+              <Text style={styles.characterSpecies}>{item.species}</Text>
             </View>
-          </TouchableOpacity>
-        )}
-      />
-    </ScrollView>
+          </View>
+        </TouchableOpacity>
+      )}
+      style={styles.flatListContainer}
+      contentContainerStyle={{
+        paddingBottom: currentTheme.spacing.lg,
+        backgroundColor: currentTheme.colors.background,
+      }}
+    />
   );
 }
 
@@ -89,6 +92,10 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: currentTheme.spacing.lg,
     paddingBottom: currentTheme.spacing.lg,
+    backgroundColor: currentTheme.colors.background,
+  },
+  flatListContainer: {
+    flex: 1,
     backgroundColor: currentTheme.colors.background,
   },
   label: {

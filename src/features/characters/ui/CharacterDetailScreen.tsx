@@ -5,7 +5,6 @@ import {
   View,
   Image,
   FlatList,
-  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -41,52 +40,57 @@ function CharacterDetailScreen() {
   }
 
   return (
-    <ScrollView
-      style={{backgroundColor: currentTheme.colors.background}}
-      contentContainerStyle={styles.container}>
-      <Header
-        title={character.name}
-        showBackButton={true}
-        showRightIcon={false}
-      />
-      <Image source={{uri: character.image}} style={styles.image} />
+    <FlatList
+      ListHeaderComponent={
+        <View style={styles.container}>
+          <Header
+            title={character.name}
+            showBackButton={true}
+            showRightIcon={false}
+          />
+          <Image source={{uri: character.image}} style={styles.image} />
 
-      <Text style={styles.label}>
-        {t('characterDetail.species')}:{' '}
-        <Text style={styles.value}>{character.species}</Text>
-      </Text>
-      <Text style={styles.label}>
-        {t('characterDetail.gender')}:{' '}
-        <Text style={styles.value}>{character.gender}</Text>
-      </Text>
-      <Text style={styles.label}>
-        {t('characterDetail.status')}:{' '}
-        <Text style={styles.value}>{character.status}</Text>
-      </Text>
+          <Text style={styles.label}>
+            {t('characterDetail.species')}:{' '}
+            <Text style={styles.value}>{character.species}</Text>
+          </Text>
+          <Text style={styles.label}>
+            {t('characterDetail.gender')}:{' '}
+            <Text style={styles.value}>{character.gender}</Text>
+          </Text>
+          <Text style={styles.label}>
+            {t('characterDetail.status')}:{' '}
+            <Text style={styles.value}>{character.status}</Text>
+          </Text>
+          <Text style={styles.label}>
+            {t('characterDetail.location')}:{' '}
+            <Text style={styles.value}>
+              {character.location.name} - {character.location.type}
+            </Text>
+          </Text>
 
-      <Text style={styles.label}>
-        {t('characterDetail.location')}:{' '}
-        <Text style={styles.value}>
-          {character.location.name} - {character.location.type}
-        </Text>
-      </Text>
-
-      <Text style={styles.subtitle}>{t('characterDetail.episodesTitle')}</Text>
-      <FlatList
-        data={character.episode}
-        keyExtractor={ep => ep.id}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}>
-            <View style={styles.episodeItem}>
-              <Text style={styles.episodeTitle}>{item.name}</Text>
-              <Text style={styles.episodeAirDate}>{item.air_date}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-        scrollEnabled={false} // Para que no interfiera con el ScrollView principal
-      />
-    </ScrollView>
+          <Text style={styles.subtitle}>
+            {t('characterDetail.episodesTitle')}
+          </Text>
+        </View>
+      }
+      data={character.episode}
+      keyExtractor={ep => ep.id}
+      renderItem={({item}) => (
+        <TouchableOpacity
+          onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}>
+          <View style={styles.episodeItem}>
+            <Text style={styles.episodeTitle}>{item.name}</Text>
+            <Text style={styles.episodeAirDate}>{item.air_date}</Text>
+          </View>
+        </TouchableOpacity>
+      )}
+      style={styles.flatListContainer}
+      contentContainerStyle={{
+        paddingBottom: currentTheme.spacing.lg,
+        backgroundColor: currentTheme.colors.background,
+      }}
+    />
   );
 }
 
@@ -95,6 +99,10 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: currentTheme.spacing.lg,
     paddingBottom: currentTheme.spacing.lg,
+    backgroundColor: currentTheme.colors.background,
+  },
+  flatListContainer: {
+    flex: 1,
     backgroundColor: currentTheme.colors.background,
   },
   image: {

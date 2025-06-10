@@ -3,6 +3,9 @@ import {gql, useQuery} from '@apollo/client';
 const GET_CHARACTERS = gql`
   query GetCharacters($page: Int!) {
     characters(page: $page) {
+      info {
+        next
+      }
       results {
         id
         image
@@ -13,7 +16,7 @@ const GET_CHARACTERS = gql`
   }
 `;
 
-interface Character {
+export interface Character {
   id: string;
   image: string;
   name: string;
@@ -22,6 +25,9 @@ interface Character {
 
 interface GetCharactersResponse {
   characters: {
+    info: {
+      next: number | null;
+    };
     results: Character[];
   };
 }
@@ -35,6 +41,7 @@ export const useCharacters = (page: number = 1) => {
     GET_CHARACTERS,
     {
       variables: {page},
+      notifyOnNetworkStatusChange: true, // Permite mostrar loading cuando haces fetchMore
     },
   );
 };
