@@ -1,16 +1,16 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useTranslation} from 'react-i18next';
-// import {useTheme} from '@shared/hooks/useTheme'; // Suponiendo que tienes esto
 import {currentTheme} from '@theme';
+import {useLanguageStore} from '@stores/useLanguageStore';
 
 function ConfigScreen() {
-  const {t, i18n} = useTranslation();
-  // const {isDark, toggleTheme} = useTheme(); // Define este hook o contexto
+  const {t} = useTranslation();
+  const {language, setLanguage} = useLanguageStore();
 
   const toggleLanguage = () => {
-    const newLang = i18n.language === 'en' ? 'es' : 'en';
-    i18n.changeLanguage(newLang);
+    const newLang = language === 'en' ? 'es' : 'en';
+    setLanguage(newLang);
   };
 
   return (
@@ -26,12 +26,6 @@ function ConfigScreen() {
       <TouchableOpacity style={styles.button} onPress={toggleLanguage}>
         <Text style={styles.buttonText}>{t('config.changeLanguage')}</Text>
       </TouchableOpacity>
-
-      {/* <TouchableOpacity style={styles.button} onPress={toggleTheme}>
-        <Text style={styles.buttonText}>
-          {isDark ? t('config.setLightTheme') : t('config.setDarkTheme')}
-        </Text>
-      </TouchableOpacity> */}
     </View>
   );
 }
@@ -57,7 +51,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: '#fff',
+    color: currentTheme.colors.background,
     fontWeight: 'bold',
   },
 });

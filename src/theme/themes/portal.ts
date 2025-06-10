@@ -8,7 +8,7 @@ export const portalTheme = {
     textPrimary: '#D63384',
     textSecondary: '#F199C1',
     border: '#D8B4FE',
-    accent: '#38BDF8',
+    accent: '#D63384',
   },
   spacing,
   typography,

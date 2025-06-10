@@ -1,3 +1,3 @@
-import {multiverseTheme} from '@theme/themes';
+import {portalTheme} from '@theme/themes';
 
-export const currentTheme = multiverseTheme;
+export const currentTheme = portalTheme;

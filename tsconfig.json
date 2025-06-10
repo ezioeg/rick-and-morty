@@ -9,7 +9,8 @@
       "@shared/*": ["shared/*"],
       "@theme/*": ["theme/*"],
       "@theme": ["theme"],
-      "@env": ["shared/types/env"]
+      "@env": ["shared/types/env"],
+      "@stores/*": ["stores/*"]
     }
   }
 }
