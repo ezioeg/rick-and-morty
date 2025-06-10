@@ -22,6 +22,6 @@ module.exports = {
         allowUndefined: true,
       },
     ],
-    'react-native-reanimated/plugin', // debe ir al final
+    'react-native-reanimated/plugin', // Debe ir al final
   ],
 };

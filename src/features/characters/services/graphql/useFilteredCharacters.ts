@@ -41,7 +41,7 @@ export const useFilteredCharacters = (
     FILTER_CHARACTERS,
     {
       variables: {filter},
-      skip: Object.keys(filter).length === 0, // optional: skip if no filters are set
+      skip: Object.keys(filter).length === 0, // Opcional: saltar si no hay filtros
     },
   );
 };

@@ -3,3 +3,4 @@ export {default as EpisodesIcon} from './EpisodesIcon';
 export {default as SearchCharacterIcon} from './SearchCharacterIcon';
 export {default as SearchEpisodeIcon} from './SearchEpisodeIcon';
 export {default as BackArrowIcon} from './BackArrowIcon';
+export {default as ConfigIcon} from './ConfigIcon';

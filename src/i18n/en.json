@@ -1,0 +1,37 @@
+{
+    "characterList": {
+      "title": "Characters",
+      "loading": "Loading characters...",
+      "error": "Error loading characters"
+    },
+    "characterDetail": {
+      "notFound": "Character not found",
+      "loading": "Loading character...",
+      "error": "Error loading character",
+      "species": "Species",
+      "gender": "Gender",
+      "status": "Status",
+      "location": "Location",
+      "episodesTitle": "Episodes in which they have appeared"
+    },
+    "episodeList": {
+      "title": "Episodes",
+      "loading": "Loading episodes...",
+      "error": "Error loading episodes"
+    },
+    "episodeDetail": {
+      "notFound": "Episode not found",
+      "loading": "Loading episode...",
+      "error": "Error loading episode",
+      "airDate": "Air date",
+      "episodeCode": "Episode code",
+      "charactersTitle": "Characters that appear in the episode"
+    },
+    "config": {
+        "title": "Config",
+        "changeLanguage": "Change Language",
+        "setDarkTheme": "Set Dark Theme",
+        "setLightTheme": "Set Light Theme"
+      }
+  }
+  

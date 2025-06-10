@@ -5,8 +5,8 @@ import {border} from '@theme/base/border';
 export const lightTheme = {
   colors: {
     background: '#FFFFFF',
-    textPrimary: '#1A1A1A', // Negro más suave
-    textSecondary: '#666F80', // Gris con tinte azul
+    textPrimary: '#1A1A1A',
+    textSecondary: '#666F80',
     border: '#CCCCCC',
     accent: '#7ECF6B',
   },

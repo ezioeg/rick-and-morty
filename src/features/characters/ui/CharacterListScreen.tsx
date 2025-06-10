@@ -14,18 +14,20 @@ import {Header, Loader, ErrorMessage} from '@shared/components';
 import {SearchCharacterIcon} from '@shared/components/icons';
 import {RootStackParamList} from '@shared/types/RootStackParamListTypes';
 import {currentTheme} from '@theme';
+import {useTranslation} from 'react-i18next';
 
 function CharacterListScreen() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const {data, loading, error} = useCharacters(1);
+  const {t} = useTranslation();
 
   if (loading) {
-    return <Loader message="Loading characters..." />;
+    return <Loader message={t('characterList.loading')} />;
   }
 
   if (error) {
-    return <ErrorMessage message="Error loading characters" />;
+    return <ErrorMessage message={t('characterList.error')} />;
   }
 
   const characters = data?.characters?.results ?? [];
@@ -33,7 +35,7 @@ function CharacterListScreen() {
   return (
     <View style={styles.container}>
       <Header
-        title="Characters"
+        title={t('characterList.title')}
         showBackButton={false}
         showRightIcon={true}
         RightIconComponent={SearchCharacterIcon}

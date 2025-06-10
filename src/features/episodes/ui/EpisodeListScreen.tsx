@@ -7,26 +7,27 @@ import {SearchEpisodeIcon} from '@shared/components/icons';
 import {Header, Loader, ErrorMessage} from '@shared/components';
 import {RootStackParamList} from '@shared/types/RootStackParamListTypes';
 import {currentTheme} from '@theme';
+import {useTranslation} from 'react-i18next';
 
 function EpisodeListScreen() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
   const {data, loading, error} = useEpisodes(1);
+  const {t} = useTranslation();
 
   if (loading) {
-    return <Loader message="Loading episodes..." />;
+    return <Loader message={t('episodeList.loading')} />;
   }
 
   if (error) {
-    return <ErrorMessage message="Error loading episodes" />;
+    return <ErrorMessage message={t('episodeList.error')} />;
   }
 
   const episodes = data?.episodes?.results ?? [];
   return (
     <View style={styles.container}>
       <Header
-        title="Episodes"
+        title={t('episodeList.title')}
         showBackButton={false}
         showRightIcon={true}
         RightIconComponent={SearchEpisodeIcon}

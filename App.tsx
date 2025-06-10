@@ -1,4 +1,5 @@
 // import 'react-native-url-polyfill/auto';
+import './src/i18n';
 import React from 'react';
 import {StatusBar, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';

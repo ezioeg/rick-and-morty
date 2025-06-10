@@ -17,26 +17,27 @@ import {
   EpisodeDetailRouteProp,
 } from '@shared/types/RootStackParamListTypes';
 import {currentTheme} from '@theme';
+import {useTranslation} from 'react-i18next';
 
 function EpisodeDetailScreen() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const {params} = useRoute<EpisodeDetailRouteProp>();
   const {id} = params;
-
   const {data, loading, error} = useEpisodeById(id);
+  const {t} = useTranslation();
 
   if (loading) {
-    return <Loader message="Loading episode..." />;
+    return <Loader message={t('episodeDetail.loading')} />;
   }
 
   if (error) {
-    return <ErrorMessage message="Error loading episode" />;
+    return <ErrorMessage message={t('episodeDetail.error')} />;
   }
 
   const episode = data?.episode;
   if (!episode) {
-    return <ErrorMessage message="Episode not found" />;
+    return <ErrorMessage message={t('episodeDetail.notFound')} />;
   }
 
   return (
@@ -50,16 +51,16 @@ function EpisodeDetailScreen() {
       />
 
       <Text style={styles.label}>
-        Air date: <Text style={styles.value}>{episode.air_date}</Text>
+        {t('episodeDetail.airDate')}:{' '}
+        <Text style={styles.value}>{episode.air_date}</Text>
       </Text>
 
       <Text style={styles.label}>
-        Episode code: <Text style={styles.value}>{episode.episode}</Text>
+        {t('episodeDetail.episodeCode')}:{' '}
+        <Text style={styles.value}>{episode.episode}</Text>
       </Text>
 
-      <Text style={styles.subtitle}>
-        Characters that appear in the episode:
-      </Text>
+      <Text style={styles.subtitle}>{t('episodeDetail.charactersTitle')}</Text>
       <FlatList
         data={episode.characters}
         keyExtractor={item => item.id}

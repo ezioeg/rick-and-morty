@@ -4,11 +4,11 @@ import {border} from '@theme/base/border';
 
 export const portalTheme = {
   colors: {
-    background: '#E0FFDE', // Verde pastel
-    textPrimary: '#D63384', // Fucsia intenso
-    textSecondary: '#F199C1', // Rosa pastel
-    border: '#D8B4FE', // Lila claro
-    accent: '#38BDF8', // Azul claro vibrante
+    background: '#E0FFDE',
+    textPrimary: '#D63384',
+    textSecondary: '#F199C1',
+    border: '#D8B4FE',
+    accent: '#38BDF8',
   },
   spacing,
   typography,

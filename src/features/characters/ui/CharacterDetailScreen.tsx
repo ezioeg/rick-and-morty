@@ -17,26 +17,27 @@ import {
   CharacterDetailRouteProp,
 } from '@shared/types/RootStackParamListTypes';
 import {currentTheme} from '@theme';
+import {useTranslation} from 'react-i18next';
 
 function CharacterDetailScreen() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const {params} = useRoute<CharacterDetailRouteProp>();
   const {id} = params;
-
   const {data, loading, error} = useCharacterById(id);
+  const {t} = useTranslation();
 
   if (loading) {
-    return <Loader message="Loading character..." />;
+    return <Loader message={t('characterDetail.loading')} />;
   }
 
   if (error) {
-    return <ErrorMessage message="Error loading character" />;
+    return <ErrorMessage message={t('characterDetail.error')} />;
   }
 
   const character = data?.character;
   if (!character) {
-    return <ErrorMessage message="Character not found" />;
+    return <ErrorMessage message={t('characterDetail.notFound')} />;
   }
 
   return (
@@ -51,23 +52,26 @@ function CharacterDetailScreen() {
       <Image source={{uri: character.image}} style={styles.image} />
 
       <Text style={styles.label}>
-        Species: <Text style={styles.value}>{character.species}</Text>
+        {t('characterDetail.species')}:{' '}
+        <Text style={styles.value}>{character.species}</Text>
       </Text>
       <Text style={styles.label}>
-        Gender: <Text style={styles.value}>{character.gender}</Text>
+        {t('characterDetail.gender')}:{' '}
+        <Text style={styles.value}>{character.gender}</Text>
       </Text>
       <Text style={styles.label}>
-        Status: <Text style={styles.value}>{character.status}</Text>
+        {t('characterDetail.status')}:{' '}
+        <Text style={styles.value}>{character.status}</Text>
       </Text>
 
       <Text style={styles.label}>
-        Location:{' '}
+        {t('characterDetail.location')}:{' '}
         <Text style={styles.value}>
           {character.location.name} - {character.location.type}
         </Text>
       </Text>
 
-      <Text style={styles.subtitle}>Episodes in which he has appeared:</Text>
+      <Text style={styles.subtitle}>{t('characterDetail.episodesTitle')}</Text>
       <FlatList
         data={character.episode}
         keyExtractor={ep => ep.id}
@@ -80,7 +84,7 @@ function CharacterDetailScreen() {
             </View>
           </TouchableOpacity>
         )}
-        scrollEnabled={false} // para que no interfiera con el ScrollView principal
+        scrollEnabled={false} // Para que no interfiera con el ScrollView principal
       />
     </ScrollView>
   );
