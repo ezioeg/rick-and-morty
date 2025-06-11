@@ -151,6 +151,7 @@ function CharacterDetailScreen() {
 }
 
 const styles = StyleSheet.create({
+  // === LAYOUT CONTAINERS ===
   container: {
     flex: 1,
     paddingHorizontal: currentTheme.spacing.lg,
@@ -161,6 +162,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: currentTheme.colors.background,
   },
+  // === IMAGE ===
   imageContainer: {
     alignSelf: 'center',
     position: 'relative',
@@ -171,6 +173,7 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 100,
   },
+  // === STATUS BADGE ===
   statusBadge: {
     position: 'absolute',
     bottom: 10,
@@ -189,21 +192,16 @@ const styles = StyleSheet.create({
     backgroundColor: currentTheme.colors.unknownBadge,
   },
   badgeText: {
-    color: currentTheme.colors.textButton,
-    fontWeight: 'bold',
     fontSize: 12,
-  },
-  subtitle: {
-    marginTop: currentTheme.spacing.lg,
-    fontSize: currentTheme.typography.subtitle,
     fontWeight: 'bold',
-    color: currentTheme.colors.textPrimary,
+    color: currentTheme.colors.textButton,
   },
+  // === EPISODE LIST ===
   episodeItem: {
     padding: currentTheme.spacing.lg,
+    backgroundColor: currentTheme.colors.background,
     borderBottomWidth: 0.5,
     borderBottomColor: currentTheme.colors.border,
-    backgroundColor: currentTheme.colors.background,
   },
   episodeRow: {
     flexDirection: 'row',
@@ -218,20 +216,29 @@ const styles = StyleSheet.create({
     color: currentTheme.colors.textSecondary,
   },
   episodeName: {
-    color: currentTheme.colors.textPrimary,
     fontWeight: 'bold',
+    color: currentTheme.colors.textPrimary,
   },
+  // === SECTION SUBTITLE ===
+  subtitle: {
+    marginTop: currentTheme.spacing.lg,
+    fontSize: currentTheme.typography.subtitle,
+    fontWeight: 'bold',
+    color: currentTheme.colors.textPrimary,
+  },
+  // === PROPERTIES SECTION ===
   propertiesContainer: {
-    backgroundColor: currentTheme.colors.background,
     padding: currentTheme.spacing.lg,
+    backgroundColor: currentTheme.colors.background,
     borderRadius: currentTheme.border.radius * 2,
   },
   locationContainer: {
-    backgroundColor: currentTheme.colors.background,
-    padding: currentTheme.spacing.lg,
-    borderRadius: currentTheme.border.radius * 2,
     marginTop: currentTheme.spacing.lg,
+    padding: currentTheme.spacing.lg,
+    backgroundColor: currentTheme.colors.background,
+    borderRadius: currentTheme.border.radius * 2,
   },
+  // === HEADERS / DIVIDERS ===
   headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -241,19 +248,20 @@ const styles = StyleSheet.create({
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: currentTheme.colors.border,
     marginHorizontal: currentTheme.spacing.sm,
+    backgroundColor: currentTheme.colors.border,
   },
   sectionTitle: {
     fontWeight: 'bold',
     color: currentTheme.colors.textPrimary,
   },
+  // === PROPERTY ROW ===
   propertyRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: currentTheme.colors.background,
+    justifyContent: 'space-between',
     paddingVertical: currentTheme.spacing.sm,
+    backgroundColor: currentTheme.colors.background,
     borderRadius: currentTheme.border.radius,
   },
   propertyLabel: {
@@ -261,8 +269,8 @@ const styles = StyleSheet.create({
     color: currentTheme.colors.textSecondary,
   },
   propertyValue: {
-    color: currentTheme.colors.textPrimary,
     fontWeight: '500',
+    color: currentTheme.colors.textPrimary,
   },
 });
 

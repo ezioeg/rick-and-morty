@@ -99,6 +99,7 @@ function EpisodeDetailScreen() {
 }
 
 const styles = StyleSheet.create({
+  // === LAYOUT CONTAINERS ===
   container: {
     flex: 1,
     paddingHorizontal: currentTheme.spacing.lg,
@@ -109,17 +110,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: currentTheme.colors.background,
   },
+  // === EPISODE PROPERTIES SECTION ===
   propertiesContainer: {
-    backgroundColor: currentTheme.colors.background,
     padding: currentTheme.spacing.lg,
+    backgroundColor: currentTheme.colors.background,
     borderRadius: currentTheme.border.radius * 2,
   },
   propertyRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: currentTheme.colors.background,
+    justifyContent: 'space-between',
     paddingVertical: currentTheme.spacing.sm,
+    backgroundColor: currentTheme.colors.background,
     borderRadius: currentTheme.border.radius,
   },
   propertyLabel: {
@@ -127,30 +129,32 @@ const styles = StyleSheet.create({
     color: currentTheme.colors.textSecondary,
   },
   propertyValue: {
-    color: currentTheme.colors.textPrimary,
     fontWeight: '500',
+    color: currentTheme.colors.textPrimary,
   },
+  // === SUBTITLE ===
   subtitle: {
     marginTop: currentTheme.spacing.md,
     fontSize: currentTheme.typography.subtitle,
-    color: currentTheme.colors.textPrimary,
     fontWeight: 'bold',
+    color: currentTheme.colors.textPrimary,
   },
+  // === CHARACTER LIST ITEM ===
   characterItem: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     padding: currentTheme.spacing.lg,
     paddingVertical: currentTheme.spacing.md,
+    backgroundColor: currentTheme.colors.background,
     borderBottomWidth: 0.5,
     borderBottomColor: currentTheme.colors.border,
-    backgroundColor: currentTheme.colors.background,
   },
   image: {
     width: 60,
     height: 60,
-    borderRadius: currentTheme.border.radius,
     marginRight: currentTheme.spacing.md,
+    borderRadius: currentTheme.border.radius,
   },
   characterInfo: {
     flex: 1,
@@ -159,15 +163,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: currentTheme.colors.textPrimary,
   },
+  characterSpecies: {
+    marginTop: 2,
+    textTransform: 'uppercase',
+    color: currentTheme.colors.textSecondary,
+  },
   statusGenderRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 4,
-  },
-  characterSpecies: {
-    color: currentTheme.colors.textSecondary,
-    textTransform: 'uppercase',
-    marginTop: 2,
   },
   characterStatus: {
     color: currentTheme.colors.textSecondary,

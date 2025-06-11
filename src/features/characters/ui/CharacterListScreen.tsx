@@ -275,6 +275,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: currentTheme.spacing.lg,
     backgroundColor: currentTheme.colors.background,
   },
+  // === ITEM LIST ===
   item: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -320,6 +321,7 @@ const styles = StyleSheet.create({
   gender: {
     color: currentTheme.colors.textSecondary,
   },
+  // === INPUT ===
   input: {
     borderWidth: 1,
     borderColor: currentTheme.colors.border,
@@ -329,6 +331,36 @@ const styles = StyleSheet.create({
     marginBottom: currentTheme.spacing.md,
     color: currentTheme.colors.textPrimary,
   },
+  // === MODAL ===
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    paddingHorizontal: currentTheme.spacing.lg,
+  },
+  modalContainer: {
+    backgroundColor: currentTheme.colors.background,
+    borderRadius: 12,
+    padding: currentTheme.spacing.lg,
+  },
+  modalTitle: {
+    fontSize: currentTheme.typography.title,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: currentTheme.spacing.md,
+    color: currentTheme.colors.textPrimary,
+  },
+  filterSectionTitle: {
+    fontSize: currentTheme.typography.subtitle,
+    marginBottom: currentTheme.spacing.md,
+    color: currentTheme.colors.textPrimary,
+  },
+  modalButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: currentTheme.spacing.md,
+  },
+  // === FILTER OPTIONS ===
   speciesFilterContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -337,8 +369,8 @@ const styles = StyleSheet.create({
   speciesOption: {
     paddingVertical: 6,
     paddingHorizontal: 12,
-    borderRadius: 20,
     borderWidth: 1,
+    borderRadius: 20,
     borderColor: currentTheme.colors.border,
     marginRight: currentTheme.spacing.sm,
     marginBottom: currentTheme.spacing.sm,
@@ -352,34 +384,6 @@ const styles = StyleSheet.create({
   },
   speciesTextSelected: {
     color: currentTheme.colors.textButton,
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center',
-    paddingHorizontal: currentTheme.spacing.lg,
-  },
-  modalContainer: {
-    backgroundColor: currentTheme.colors.background,
-    borderRadius: 12,
-    padding: currentTheme.spacing.lg,
-  },
-  modalTitle: {
-    fontSize: currentTheme.typography.title,
-    fontWeight: 'bold',
-    marginBottom: currentTheme.spacing.md,
-    textAlign: 'center',
-    color: currentTheme.colors.textPrimary,
-  },
-  filterSectionTitle: {
-    fontSize: currentTheme.typography.subtitle,
-    marginBottom: currentTheme.spacing.md,
-    color: currentTheme.colors.textPrimary,
-  },
-  modalButtonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: currentTheme.spacing.md,
   },
 });
 

@@ -98,11 +98,13 @@ function EpisodeListScreen() {
   );
 }
 const styles = StyleSheet.create({
+  // === CONTAINER ===
   container: {
     flex: 1,
     paddingHorizontal: currentTheme.spacing.lg,
     backgroundColor: currentTheme.colors.background,
   },
+  // === ITEM ===
   item: {
     marginBottom: currentTheme.spacing.lg,
     padding: currentTheme.spacing.md,
@@ -114,14 +116,16 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
+  // === HEADER ROW INSIDE ITEM ===
   headerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 4,
   },
+  // === TEXT ===
   episode: {
-    fontWeight: 'bold',
     fontSize: currentTheme.typography.subtitle,
+    fontWeight: 'bold',
     color: currentTheme.colors.textPrimary,
   },
   airDate: {
@@ -129,8 +133,8 @@ const styles = StyleSheet.create({
     color: currentTheme.colors.textSecondary,
   },
   title: {
-    fontWeight: 'bold',
     fontSize: currentTheme.typography.subtitle,
+    fontWeight: 'bold',
     color: currentTheme.colors.textPrimary,
   },
 });
