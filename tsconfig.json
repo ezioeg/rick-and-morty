@@ -10,7 +10,8 @@
       "@theme/*": ["theme/*"],
       "@theme": ["theme"],
       "@env": ["shared/types/env"],
-      "@stores/*": ["stores/*"]
+      "@stores/*": ["stores/*"],
+      "@utils/*": ["utils/*"]
     }
   }
 }

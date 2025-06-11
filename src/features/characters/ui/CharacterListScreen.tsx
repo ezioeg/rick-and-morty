@@ -4,11 +4,8 @@ import {
   Text,
   FlatList,
   StyleSheet,
-  Image,
   TouchableOpacity,
   TextInput,
-  Modal,
-  Button,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -19,6 +16,13 @@ import {RootStackParamList} from '@shared/types/RootStackParamListTypes';
 import {currentTheme} from '@theme';
 import {useTranslation} from 'react-i18next';
 import {Character} from '@features/characters/services/graphql/useCharacters';
+import CharacterCardMain from '../components/CharacterCardMain';
+import FilterModal from '../components/FilterModal';
+import {
+  filterCharacters,
+  getUniqueSpeciesOptions,
+  mergeUniqueCharacters,
+} from '@features/characters/utils';
 
 function CharacterListScreen() {
   const navigation =
@@ -63,11 +67,7 @@ function CharacterListScreen() {
       const newResults = moreData?.characters?.results || [];
       const newNext = moreData?.characters?.info?.next;
 
-      setCharacters(prev => {
-        const existingIds = new Set(prev.map(c => c.id));
-        const filteredNew = newResults.filter(c => !existingIds.has(c.id));
-        return [...prev, ...filteredNew];
-      });
+      setCharacters(prev => mergeUniqueCharacters(prev, newResults));
 
       setNextPage(newNext);
     } catch (e) {
@@ -76,32 +76,21 @@ function CharacterListScreen() {
     setIsFetchingMore(false);
   };
 
-  const speciesOptions = useMemo(() => {
-    const speciesSet = new Set(characters.map(c => c.species));
-    return ['Todos', ...Array.from(speciesSet).sort()];
-  }, [characters]);
+  const speciesOptions = useMemo(
+    () => getUniqueSpeciesOptions(characters),
+    [characters],
+  );
 
   const STATUS_OPTIONS = ['Todos', 'Alive', 'Dead', 'unknown'];
 
   const filteredCharacters = useMemo(() => {
-    let filtered = characters;
-
-    if (speciesFilter !== 'Todos') {
-      filtered = filtered.filter(c => c.species === speciesFilter);
-    }
-
-    if (statusFilter !== 'Todos') {
-      filtered = filtered.filter(c => c.status === statusFilter);
-    }
-
-    if (nameFilter.trim() !== '') {
-      filtered = filtered.filter(c =>
-        c.name.toLowerCase().includes(nameFilter.toLowerCase()),
-      );
-    }
-
-    return [...filtered].sort((a, b) => a.name.localeCompare(b.name));
-  }, [characters, speciesFilter, statusFilter, nameFilter]);
+    return filterCharacters(
+      characters,
+      nameFilter,
+      speciesFilter,
+      statusFilter,
+    );
+  }, [characters, nameFilter, speciesFilter, statusFilter]);
 
   if (loading && characters.length === 0) {
     return <Loader message={t('characterList.loading')} />;
@@ -151,120 +140,92 @@ function CharacterListScreen() {
         data={filteredCharacters}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
-          <TouchableOpacity
+          <CharacterCardMain
+            character={item}
             onPress={() =>
               navigation.navigate('CharacterDetail', {id: item.id})
-            }>
-            <View style={styles.item}>
-              <Image source={{uri: item.image}} style={styles.image} />
-              <View style={styles.textContainer}>
-                <Text style={styles.name}>{item.name}</Text>
-                <Text style={styles.species}>{item.species.toUpperCase()}</Text>
-                <View style={styles.statusGenderRow}>
-                  <Text style={styles.status}>{item.status}</Text>
-                  <Text style={styles.gender}>{item.gender}</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
+            }
+          />
         )}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}
         ListFooterComponent={isFetchingMore ? <Loader /> : null}
       />
-      <Modal
+      <FilterModal
         visible={isFilterModalVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setIsFilterModalVisible(false)}>
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContainer}>
-            <Text style={styles.modalTitle}>
-              {t('characterList.filtersTitle')}
-            </Text>
-
-            <Text style={styles.filterSectionTitle}>
-              {t('characterList.filterByName')}
-            </Text>
-            <TextInput
-              placeholder={t('characterList.filterByName')}
-              placeholderTextColor={currentTheme.colors.textSecondary}
-              style={styles.input}
-              value={tempNameFilter}
-              onChangeText={setTempNameFilter}
-              autoCorrect={false}
-              autoCapitalize="none"
-            />
-
-            <Text style={styles.filterSectionTitle}>
-              {t('characterList.filterBySpecies')}
-            </Text>
-            <View style={styles.speciesFilterContainer}>
-              {speciesOptions.map(species => (
-                <TouchableOpacity
-                  key={species}
-                  style={[
-                    styles.speciesOption,
-                    tempSpeciesFilter === species &&
-                      styles.speciesOptionSelected,
-                  ]}
-                  onPress={() => setTempSpeciesFilter(species)}>
-                  <Text
-                    style={
-                      tempSpeciesFilter === species
-                        ? styles.speciesTextSelected
-                        : styles.speciesText
-                    }>
-                    {species}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-
-            <Text style={styles.filterSectionTitle}>
-              {t('characterList.filterByStatus')}
-            </Text>
-            <View style={styles.speciesFilterContainer}>
-              {STATUS_OPTIONS.map(status => (
-                <TouchableOpacity
-                  key={status}
-                  style={[
-                    styles.speciesOption,
-                    tempStatusFilter === status && styles.speciesOptionSelected,
-                  ]}
-                  onPress={() => setTempStatusFilter(status)}>
-                  <Text
-                    style={
-                      tempStatusFilter === status
-                        ? styles.speciesTextSelected
-                        : styles.speciesText
-                    }>
-                    {status}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-
-            <View style={styles.modalButtonsContainer}>
-              <Button
-                title={t('characterList.filterResetButton')}
-                onPress={resetFilters}
-                color={currentTheme.colors.backgroundButton}
+        title={t('characterList.filtersTitle')}
+        onClose={() => setIsFilterModalVisible(false)}
+        onReset={resetFilters}
+        onApply={applyFilters}
+        sections={[
+          {
+            title: t('characterList.filterByName'),
+            content: (
+              <TextInput
+                placeholder={t('characterList.filterByName')}
+                placeholderTextColor={currentTheme.colors.textSecondary}
+                style={styles.input}
+                value={tempNameFilter}
+                onChangeText={setTempNameFilter}
+                autoCorrect={false}
+                autoCapitalize="none"
               />
-              <Button
-                title={t('characterList.filterApplyButton')}
-                onPress={applyFilters}
-                color={currentTheme.colors.backgroundButton}
-              />
-              <Button
-                title={t('characterList.filterCloseButton')}
-                onPress={() => setIsFilterModalVisible(false)}
-                color={currentTheme.colors.backgroundButton}
-              />
-            </View>
-          </View>
-        </View>
-      </Modal>
+            ),
+          },
+          {
+            title: t('characterList.filterBySpecies'),
+            content: (
+              <View style={styles.speciesFilterContainer}>
+                {speciesOptions.map(species => (
+                  <TouchableOpacity
+                    key={species}
+                    style={[
+                      styles.speciesOption,
+                      tempSpeciesFilter === species &&
+                        styles.speciesOptionSelected,
+                    ]}
+                    onPress={() => setTempSpeciesFilter(species)}>
+                    <Text
+                      style={
+                        tempSpeciesFilter === species
+                          ? styles.speciesTextSelected
+                          : styles.speciesText
+                      }>
+                      {species}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            ),
+          },
+          {
+            title: t('characterList.filterByStatus'),
+            content: (
+              <View style={styles.speciesFilterContainer}>
+                {STATUS_OPTIONS.map(status => (
+                  <TouchableOpacity
+                    key={status}
+                    style={[
+                      styles.speciesOption,
+                      tempStatusFilter === status &&
+                        styles.speciesOptionSelected,
+                    ]}
+                    onPress={() => setTempStatusFilter(status)}>
+                    <Text
+                      style={
+                        tempStatusFilter === status
+                          ? styles.speciesTextSelected
+                          : styles.speciesText
+                      }>
+                      {status}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            ),
+          },
+        ]}
+      />
     </View>
   );
 }
@@ -275,53 +236,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: currentTheme.spacing.lg,
     backgroundColor: currentTheme.colors.background,
   },
-  // === ITEM LIST ===
-  item: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: currentTheme.colors.background,
-    padding: currentTheme.spacing.md,
-    marginBottom: currentTheme.spacing.lg,
-    borderRadius: currentTheme.border.radius * 2,
-    shadowColor: currentTheme.colors.shadowColor,
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  image: {
-    width: 60,
-    height: 60,
-    borderRadius: currentTheme.border.radius,
-    marginRight: currentTheme.spacing.md,
-  },
-  textContainer: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  name: {
-    fontSize: currentTheme.typography.subtitle,
-    fontWeight: 'bold',
-    color: currentTheme.colors.textPrimary,
-    marginBottom: 4,
-  },
-  species: {
-    textTransform: 'uppercase',
-    color: currentTheme.colors.textSecondary,
-    marginBottom: 4,
-  },
-  statusGenderRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  status: {
-    color: currentTheme.colors.textSecondary,
-  },
-  gender: {
-    color: currentTheme.colors.textSecondary,
-  },
-  // === INPUT ===
   input: {
     borderWidth: 1,
     borderColor: currentTheme.colors.border,
@@ -331,36 +245,6 @@ const styles = StyleSheet.create({
     marginBottom: currentTheme.spacing.md,
     color: currentTheme.colors.textPrimary,
   },
-  // === MODAL ===
-  modalOverlay: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    paddingHorizontal: currentTheme.spacing.lg,
-  },
-  modalContainer: {
-    backgroundColor: currentTheme.colors.background,
-    borderRadius: 12,
-    padding: currentTheme.spacing.lg,
-  },
-  modalTitle: {
-    fontSize: currentTheme.typography.title,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: currentTheme.spacing.md,
-    color: currentTheme.colors.textPrimary,
-  },
-  filterSectionTitle: {
-    fontSize: currentTheme.typography.subtitle,
-    marginBottom: currentTheme.spacing.md,
-    color: currentTheme.colors.textPrimary,
-  },
-  modalButtonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: currentTheme.spacing.md,
-  },
-  // === FILTER OPTIONS ===
   speciesFilterContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',

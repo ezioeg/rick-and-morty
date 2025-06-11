@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useEpisodes} from '@features/episodes/services/graphql';
@@ -9,6 +9,7 @@ import {RootStackParamList} from '@shared/types/RootStackParamListTypes';
 import {currentTheme} from '@theme';
 import {useTranslation} from 'react-i18next';
 import {Episode} from '@features/episodes/services/graphql/useEpisodes';
+import EpisodeCardMain from '../components/EpisodeCardMain';
 
 function EpisodeListScreen() {
   const navigation =
@@ -79,16 +80,10 @@ function EpisodeListScreen() {
         data={episodes}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}>
-            <View style={styles.item}>
-              <View style={styles.headerRow}>
-                <Text style={styles.episode}>{item.episode}</Text>
-                <Text style={styles.airDate}>{item.air_date}</Text>
-              </View>
-              <Text style={styles.title}>{item.name}</Text>
-            </View>
-          </TouchableOpacity>
+          <EpisodeCardMain
+            episode={item}
+            onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}
+          />
         )}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}
@@ -98,44 +93,10 @@ function EpisodeListScreen() {
   );
 }
 const styles = StyleSheet.create({
-  // === CONTAINER ===
   container: {
     flex: 1,
     paddingHorizontal: currentTheme.spacing.lg,
     backgroundColor: currentTheme.colors.background,
-  },
-  // === ITEM ===
-  item: {
-    marginBottom: currentTheme.spacing.lg,
-    padding: currentTheme.spacing.md,
-    borderRadius: currentTheme.border.radius * 2,
-    backgroundColor: currentTheme.colors.background,
-    shadowColor: currentTheme.colors.shadowColor,
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
-  },
-  // === HEADER ROW INSIDE ITEM ===
-  headerRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 4,
-  },
-  // === TEXT ===
-  episode: {
-    fontSize: currentTheme.typography.subtitle,
-    fontWeight: 'bold',
-    color: currentTheme.colors.textPrimary,
-  },
-  airDate: {
-    fontSize: currentTheme.typography.subtitle,
-    color: currentTheme.colors.textSecondary,
-  },
-  title: {
-    fontSize: currentTheme.typography.subtitle,
-    fontWeight: 'bold',
-    color: currentTheme.colors.textPrimary,
   },
 });
 
