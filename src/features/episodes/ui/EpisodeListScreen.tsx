@@ -29,14 +29,6 @@ function EpisodeListScreen() {
     }
   }, [data]);
 
-  if (loading && episodes.length === 0) {
-    return <Loader message={t('episodeList.loading')} />;
-  }
-
-  if (error && episodes.length === 0) {
-    return <ErrorMessage message={t('episodeList.error')} />;
-  }
-
   const handleLoadMore = async () => {
     if (!nextPage || isFetchingMore) return;
 
@@ -61,6 +53,14 @@ function EpisodeListScreen() {
     }
     setIsFetchingMore(false);
   };
+
+  if (loading && episodes.length === 0) {
+    return <Loader message={t('episodeList.loading')} />;
+  }
+
+  if (error && episodes.length === 0) {
+    return <ErrorMessage message={t('episodeList.error')} />;
+  }
 
   const renderEpisodeItem = ({item}: {item: Episode}) => (
     <EpisodeCardMain
