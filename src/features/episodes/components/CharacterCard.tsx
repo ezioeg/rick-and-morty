@@ -10,7 +10,10 @@ const CharacterCard = ({
   character: Character;
   onPress: () => void;
 }) => (
-  <TouchableOpacity onPress={onPress}>
+  <TouchableOpacity
+    onPress={onPress}
+    accessibilityRole="button"
+    testID="touchable-button">
     <View style={styles.characterItem}>
       <Image source={{uri: character.image}} style={styles.image} />
       <View style={styles.characterInfo}>

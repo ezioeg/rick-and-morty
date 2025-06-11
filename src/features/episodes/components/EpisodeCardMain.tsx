@@ -11,7 +11,7 @@ const EpisodeCardMain = ({
   onPress: () => void;
 }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress} testID="episode-card-touchable">
       <View style={styles.item}>
         <View style={styles.headerRow}>
           <Text style={styles.episode}>{episode.episode}</Text>
