@@ -249,17 +249,17 @@ function CharacterListScreen() {
               <Button
                 title={t('characterList.filterResetButton')}
                 onPress={resetFilters}
-                color={currentTheme.colors.textPrimary}
+                color={currentTheme.colors.backgroundButton}
               />
               <Button
                 title={t('characterList.filterApplyButton')}
                 onPress={applyFilters}
-                color={currentTheme.colors.textPrimary}
+                color={currentTheme.colors.backgroundButton}
               />
               <Button
                 title={t('characterList.filterCloseButton')}
                 onPress={() => setIsFilterModalVisible(false)}
-                color={currentTheme.colors.textPrimary}
+                color={currentTheme.colors.backgroundButton}
               />
             </View>
           </View>
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     padding: currentTheme.spacing.md,
     marginBottom: currentTheme.spacing.lg,
     borderRadius: currentTheme.border.radius * 2,
-    shadowColor: '#000',
+    shadowColor: currentTheme.colors.shadowColor,
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -303,15 +303,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: currentTheme.colors.textPrimary,
     marginBottom: 4,
-  },
-  infoRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 10,
-  },
-  infoText: {
-    color: currentTheme.colors.textSecondary,
-    marginRight: 12,
   },
   species: {
     textTransform: 'uppercase',
@@ -360,7 +351,7 @@ const styles = StyleSheet.create({
     color: currentTheme.colors.textSecondary,
   },
   speciesTextSelected: {
-    color: '#fff',
+    color: currentTheme.colors.textButton,
   },
   modalOverlay: {
     flex: 1,

@@ -1,3 +1,3 @@
-import {portalTheme} from '@theme/themes';
+import {darkTheme} from '@theme/themes';
 
-export const currentTheme = portalTheme;
+export const currentTheme = darkTheme;

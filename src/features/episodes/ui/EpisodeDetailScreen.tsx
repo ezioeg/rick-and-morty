@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
     padding: currentTheme.spacing.lg,
     borderRadius: currentTheme.border.radius * 2,
   },
-
   propertyRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -123,12 +122,10 @@ const styles = StyleSheet.create({
     paddingVertical: currentTheme.spacing.sm,
     borderRadius: currentTheme.border.radius,
   },
-
   propertyLabel: {
     fontWeight: 'bold',
     color: currentTheme.colors.textSecondary,
   },
-
   propertyValue: {
     color: currentTheme.colors.textPrimary,
     fontWeight: '500',

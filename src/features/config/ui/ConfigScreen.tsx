@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: currentTheme.colors.background,
+    color: currentTheme.colors.textButton,
     fontWeight: 'bold',
   },
 });

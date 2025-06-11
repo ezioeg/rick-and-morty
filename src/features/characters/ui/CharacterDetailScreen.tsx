@@ -180,27 +180,18 @@ const styles = StyleSheet.create({
     borderRadius: currentTheme.border.radius,
   },
   badgeAlive: {
-    backgroundColor: 'green',
+    backgroundColor: currentTheme.colors.aliveBadge,
   },
   badgeDead: {
-    backgroundColor: 'red',
+    backgroundColor: currentTheme.colors.deadBadge,
   },
   badgeUnknown: {
-    backgroundColor: 'gray',
+    backgroundColor: currentTheme.colors.unknownBadge,
   },
   badgeText: {
-    color: 'white',
+    color: currentTheme.colors.textButton,
     fontWeight: 'bold',
     fontSize: 12,
-  },
-  label: {
-    fontWeight: 'bold',
-    marginBottom: currentTheme.spacing.xs,
-    color: currentTheme.colors.textPrimary,
-  },
-  value: {
-    fontWeight: 'normal',
-    color: currentTheme.colors.textSecondary,
   },
   subtitle: {
     marginTop: currentTheme.spacing.lg,
