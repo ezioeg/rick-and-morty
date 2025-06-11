@@ -15,11 +15,14 @@
       "notFound": "Character not found",
       "loading": "Loading character...",
       "error": "Error loading character",
-      "species": "Species",
-      "gender": "Gender",
-      "status": "Status",
-      "location": "Location",
-      "episodesTitle": "Episodes in which they have appeared"
+      "properties": "PROPERTIES",
+      "species": "SPECIE",
+      "gender": "GENDER",
+      "status": "STATUS",
+      "location": "LOCATION",
+      "locationName": "NAME",
+      "locationType": "TYPE",
+      "episodesTitle": "Episodes Featuring This Character" 
     },
     "episodeList": {
       "title": "Episodes",
@@ -30,9 +33,9 @@
       "notFound": "Episode not found",
       "loading": "Loading episode...",
       "error": "Error loading episode",
-      "airDate": "Air date",
-      "episodeCode": "Episode code",
-      "charactersTitle": "Characters that appear in the episode"
+      "airDate": "AIR DATE",
+      "episodeCode": "EPISODE CODE",
+      "charactersTitle": "Characters Appearing in This Episode"
     },
     "config": {
         "title": "Config",

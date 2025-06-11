@@ -49,15 +49,20 @@ function EpisodeDetailScreen() {
             showRightIcon={false}
           />
 
-          <Text style={styles.label}>
-            {t('episodeDetail.episodeCode')}:{' '}
-            <Text style={styles.value}>{episode.episode}</Text>
-          </Text>
-
-          <Text style={styles.label}>
-            {t('episodeDetail.airDate')}:{' '}
-            <Text style={styles.value}>{episode.air_date}</Text>
-          </Text>
+          <View style={styles.propertiesContainer}>
+            <View style={styles.propertyRow}>
+              <Text style={styles.propertyLabel}>
+                {t('episodeDetail.episodeCode')}
+              </Text>
+              <Text style={styles.propertyValue}>{episode.episode}</Text>
+            </View>
+            <View style={styles.propertyRow}>
+              <Text style={styles.propertyLabel}>
+                {t('episodeDetail.airDate')}
+              </Text>
+              <Text style={styles.propertyValue}>{episode.air_date}</Text>
+            </View>
+          </View>
 
           <Text style={styles.subtitle}>
             {t('episodeDetail.charactersTitle')}
@@ -73,9 +78,13 @@ function EpisodeDetailScreen() {
             <Image source={{uri: item.image}} style={styles.image} />
             <View style={styles.characterInfo}>
               <Text style={styles.characterName}>{item.name}</Text>
-              <Text style={styles.characterSpecies}>{item.species}</Text>
-              <Text style={styles.characterStatus}>{item.status}</Text>
-              <Text style={styles.characterGender}>{item.gender}</Text>
+              <Text style={styles.characterSpecies}>
+                {item.species.toUpperCase()}
+              </Text>
+              <View style={styles.statusGenderRow}>
+                <Text style={styles.characterStatus}>{item.status}</Text>
+                <Text style={styles.characterGender}>{item.gender}</Text>
+              </View>
             </View>
           </View>
         </TouchableOpacity>
@@ -100,14 +109,29 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: currentTheme.colors.background,
   },
-  label: {
-    fontWeight: 'bold',
-    marginBottom: currentTheme.spacing.xs,
-    color: currentTheme.colors.textPrimary,
+  propertiesContainer: {
+    backgroundColor: currentTheme.colors.background,
+    padding: currentTheme.spacing.lg,
+    borderRadius: currentTheme.border.radius * 2,
   },
-  value: {
-    fontWeight: 'normal',
+
+  propertyRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: currentTheme.colors.background,
+    paddingVertical: currentTheme.spacing.sm,
+    borderRadius: currentTheme.border.radius,
+  },
+
+  propertyLabel: {
+    fontWeight: 'bold',
     color: currentTheme.colors.textSecondary,
+  },
+
+  propertyValue: {
+    color: currentTheme.colors.textPrimary,
+    fontWeight: '500',
   },
   subtitle: {
     marginTop: currentTheme.spacing.md,
@@ -138,8 +162,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: currentTheme.colors.textPrimary,
   },
+  statusGenderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 4,
+  },
   characterSpecies: {
     color: currentTheme.colors.textSecondary,
+    textTransform: 'uppercase',
+    marginTop: 2,
   },
   characterStatus: {
     color: currentTheme.colors.textSecondary,

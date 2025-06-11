@@ -15,11 +15,14 @@
       "notFound": "Personaje no encontrado",
       "loading": "Cargando personaje...",
       "error": "Error al cargar personaje",
-      "species": "Especie",
-      "gender": "Género",
-      "status": "Estado",
-      "location": "Ubicación",
-      "episodesTitle": "Episodios en los que ha aparecido"
+      "properties": "PROPIEDADES",
+      "species": "ESPECIE",
+      "gender": "GENERO",
+      "status": "ESTADO",
+      "location": "UBICACIÓN",
+      "locationName": "NOMBRE",
+      "locationType": "TIPO",
+      "episodesTitle": "Episodios con este personaje"
     },
     "episodeList": {
       "title": "Episodios",
@@ -30,9 +33,9 @@
       "notFound": "Episodio no encontrado",
       "loading": "Cargando episodio...",
       "error": "Error al cargar episodio",
-      "airDate": "Fecha de emisión",
-      "episodeCode": "Código del episodio",
-      "charactersTitle": "Personajes que aparecen en el episodio"
+      "airDate": "FECHA DE EMISIÓN",
+      "episodeCode": "CÓDIGO DE EPISODIO",
+      "charactersTitle": "Personajes que aparecen en este episodio"
     },
     "config": {
         "title": "Configuración",

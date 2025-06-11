@@ -48,26 +48,79 @@ function CharacterDetailScreen() {
             showBackButton={true}
             showRightIcon={false}
           />
-          <Image source={{uri: character.image}} style={styles.image} />
+          <View style={styles.imageContainer}>
+            <Image source={{uri: character.image}} style={styles.image} />
+            {character.status && (
+              <View
+                style={[
+                  styles.statusBadge,
+                  character.status === 'Alive'
+                    ? styles.badgeAlive
+                    : character.status === 'Dead'
+                    ? styles.badgeDead
+                    : styles.badgeUnknown,
+                ]}>
+                <Text style={styles.badgeText}>
+                  {character.status.toUpperCase()}
+                </Text>
+              </View>
+            )}
+          </View>
 
-          <Text style={styles.label}>
-            {t('characterDetail.species')}:{' '}
-            <Text style={styles.value}>{character.species}</Text>
-          </Text>
-          <Text style={styles.label}>
-            {t('characterDetail.gender')}:{' '}
-            <Text style={styles.value}>{character.gender}</Text>
-          </Text>
-          <Text style={styles.label}>
-            {t('characterDetail.status')}:{' '}
-            <Text style={styles.value}>{character.status}</Text>
-          </Text>
-          <Text style={styles.label}>
-            {t('characterDetail.location')}:{' '}
-            <Text style={styles.value}>
-              {character.location.name} - {character.location.type}
-            </Text>
-          </Text>
+          <View style={styles.propertiesContainer}>
+            <View style={styles.headerRow}>
+              <View style={styles.line} />
+              <Text style={styles.sectionTitle}>
+                {t('characterDetail.properties')}
+              </Text>
+              <View style={styles.line} />
+            </View>
+
+            <View style={styles.propertyRow}>
+              <Text style={styles.propertyLabel}>
+                {t('characterDetail.gender')}
+              </Text>
+              <Text style={styles.propertyValue}>{character.gender}</Text>
+            </View>
+            <View style={styles.propertyRow}>
+              <Text style={styles.propertyLabel}>
+                {t('characterDetail.species')}
+              </Text>
+              <Text style={styles.propertyValue}>{character.species}</Text>
+            </View>
+            <View style={styles.propertyRow}>
+              <Text style={styles.propertyLabel}>
+                {t('characterDetail.status')}
+              </Text>
+              <Text style={styles.propertyValue}>{character.status}</Text>
+            </View>
+          </View>
+          <View style={styles.locationContainer}>
+            <View style={styles.headerRow}>
+              <View style={styles.line} />
+              <Text style={styles.sectionTitle}>
+                {t('characterDetail.location')}
+              </Text>
+              <View style={styles.line} />
+            </View>
+
+            <View style={styles.propertyRow}>
+              <Text style={styles.propertyLabel}>
+                {t('characterDetail.locationName')}
+              </Text>
+              <Text style={styles.propertyValue}>
+                {character.location.name}
+              </Text>
+            </View>
+            <View style={styles.propertyRow}>
+              <Text style={styles.propertyLabel}>
+                {t('characterDetail.locationType')}
+              </Text>
+              <Text style={styles.propertyValue}>
+                {character.location.type}
+              </Text>
+            </View>
+          </View>
 
           <Text style={styles.subtitle}>
             {t('characterDetail.episodesTitle')}
@@ -80,9 +133,11 @@ function CharacterDetailScreen() {
         <TouchableOpacity
           onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}>
           <View style={styles.episodeItem}>
-            <Text style={styles.episodeTitle}>{item.episode}</Text>
-            <Text style={styles.episodeTitle}>{item.name}</Text>
-            <Text style={styles.episodeAirDate}>{item.air_date}</Text>
+            <View style={styles.episodeRow}>
+              <Text style={styles.episodeTitle}>{item.episode}</Text>
+              <Text style={styles.episodeAirDate}>{item.air_date}</Text>
+            </View>
+            <Text style={styles.episodeName}>{item.name}</Text>
           </View>
         </TouchableOpacity>
       )}
@@ -106,12 +161,37 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: currentTheme.colors.background,
   },
+  imageContainer: {
+    alignSelf: 'center',
+    position: 'relative',
+    marginBottom: currentTheme.spacing.lg,
+  },
   image: {
     width: 200,
     height: 200,
+    borderRadius: 100,
+  },
+  statusBadge: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    paddingHorizontal: currentTheme.spacing.sm,
+    paddingVertical: currentTheme.spacing.xs,
     borderRadius: currentTheme.border.radius,
-    alignSelf: 'center',
-    marginBottom: currentTheme.spacing.lg,
+  },
+  badgeAlive: {
+    backgroundColor: 'green',
+  },
+  badgeDead: {
+    backgroundColor: 'red',
+  },
+  badgeUnknown: {
+    backgroundColor: 'gray',
+  },
+  badgeText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 12,
   },
   label: {
     fontWeight: 'bold',
@@ -132,6 +212,12 @@ const styles = StyleSheet.create({
     padding: currentTheme.spacing.lg,
     borderBottomWidth: 0.5,
     borderBottomColor: currentTheme.colors.border,
+    backgroundColor: currentTheme.colors.background,
+  },
+  episodeRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 4,
   },
   episodeTitle: {
     fontWeight: 'bold',
@@ -139,6 +225,53 @@ const styles = StyleSheet.create({
   },
   episodeAirDate: {
     color: currentTheme.colors.textSecondary,
+  },
+  episodeName: {
+    color: currentTheme.colors.textPrimary,
+    fontWeight: 'bold',
+  },
+  propertiesContainer: {
+    backgroundColor: currentTheme.colors.background,
+    padding: currentTheme.spacing.lg,
+    borderRadius: currentTheme.border.radius * 2,
+  },
+  locationContainer: {
+    backgroundColor: currentTheme.colors.background,
+    padding: currentTheme.spacing.lg,
+    borderRadius: currentTheme.border.radius * 2,
+    marginTop: currentTheme.spacing.lg,
+  },
+  headerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: currentTheme.spacing.md,
+  },
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: currentTheme.colors.border,
+    marginHorizontal: currentTheme.spacing.sm,
+  },
+  sectionTitle: {
+    fontWeight: 'bold',
+    color: currentTheme.colors.textPrimary,
+  },
+  propertyRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: currentTheme.colors.background,
+    paddingVertical: currentTheme.spacing.sm,
+    borderRadius: currentTheme.border.radius,
+  },
+  propertyLabel: {
+    fontWeight: 'bold',
+    color: currentTheme.colors.textSecondary,
+  },
+  propertyValue: {
+    color: currentTheme.colors.textPrimary,
+    fontWeight: '500',
   },
 });
 

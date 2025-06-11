@@ -82,9 +82,11 @@ function EpisodeListScreen() {
           <TouchableOpacity
             onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}>
             <View style={styles.item}>
-              <Text style={styles.title}>{item.episode}</Text>
+              <View style={styles.headerRow}>
+                <Text style={styles.episode}>{item.episode}</Text>
+                <Text style={styles.airDate}>{item.air_date}</Text>
+              </View>
               <Text style={styles.title}>{item.name}</Text>
-              <Text style={styles.airDate}>{item.air_date}</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -103,16 +105,33 @@ const styles = StyleSheet.create({
   },
   item: {
     marginBottom: currentTheme.spacing.lg,
-    borderRadius: currentTheme.border.radius,
+    padding: currentTheme.spacing.md,
+    borderRadius: currentTheme.border.radius * 2,
     backgroundColor: currentTheme.colors.background,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
   },
-  title: {
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 4,
+  },
+  episode: {
     fontWeight: 'bold',
     fontSize: currentTheme.typography.subtitle,
     color: currentTheme.colors.textPrimary,
   },
   airDate: {
+    fontSize: currentTheme.typography.subtitle,
     color: currentTheme.colors.textSecondary,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: currentTheme.typography.subtitle,
+    color: currentTheme.colors.textPrimary,
   },
 });
 

@@ -159,9 +159,11 @@ function CharacterListScreen() {
               <Image source={{uri: item.image}} style={styles.image} />
               <View style={styles.textContainer}>
                 <Text style={styles.name}>{item.name}</Text>
-                <Text style={styles.species}>{item.species}</Text>
-                <Text style={styles.status}>{item.status}</Text>
-                <Text style={styles.gender}>{item.gender}</Text>
+                <Text style={styles.species}>{item.species.toUpperCase()}</Text>
+                <View style={styles.statusGenderRow}>
+                  <Text style={styles.status}>{item.status}</Text>
+                  <Text style={styles.gender}>{item.gender}</Text>
+                </View>
               </View>
             </View>
           </TouchableOpacity>
@@ -170,7 +172,6 @@ function CharacterListScreen() {
         onEndReachedThreshold={0.5}
         ListFooterComponent={isFetchingMore ? <Loader /> : null}
       />
-
       <Modal
         visible={isFilterModalVisible}
         animationType="slide"
@@ -277,7 +278,15 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: currentTheme.colors.background,
+    padding: currentTheme.spacing.md,
     marginBottom: currentTheme.spacing.lg,
+    borderRadius: currentTheme.border.radius * 2,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   image: {
     width: 60,
@@ -287,14 +296,32 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
+    justifyContent: 'center',
   },
   name: {
     fontSize: currentTheme.typography.subtitle,
     fontWeight: 'bold',
     color: currentTheme.colors.textPrimary,
+    marginBottom: 4,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+  },
+  infoText: {
+    color: currentTheme.colors.textSecondary,
+    marginRight: 12,
   },
   species: {
+    textTransform: 'uppercase',
     color: currentTheme.colors.textSecondary,
+    marginBottom: 4,
+  },
+  statusGenderRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   status: {
     color: currentTheme.colors.textSecondary,
