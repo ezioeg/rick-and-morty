@@ -120,6 +120,13 @@ function CharacterListScreen() {
     setTempStatusFilter('Todos');
   };
 
+  const renderCharacterItem = ({item}: {item: Character}) => (
+    <CharacterCardMain
+      character={item}
+      onPress={() => navigation.navigate('CharacterDetail', {id: item.id})}
+    />
+  );
+
   return (
     <View style={styles.container}>
       <Header
@@ -139,14 +146,7 @@ function CharacterListScreen() {
       <FlatList
         data={filteredCharacters}
         keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => (
-          <CharacterCardMain
-            character={item}
-            onPress={() =>
-              navigation.navigate('CharacterDetail', {id: item.id})
-            }
-          />
-        )}
+        renderItem={renderCharacterItem}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}
         ListFooterComponent={isFetchingMore ? <Loader /> : null}

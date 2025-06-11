@@ -17,6 +17,7 @@ import {
 import {currentTheme} from '@theme';
 import {useTranslation} from 'react-i18next';
 import CharacterCard from '../components/CharacterCard';
+import {Character} from '@features/characters/services/graphql/useCharacters';
 
 function EpisodeDetailScreen() {
   const navigation =
@@ -38,6 +39,13 @@ function EpisodeDetailScreen() {
   if (!episode) {
     return <ErrorMessage message={t('episodeDetail.notFound')} />;
   }
+
+  const renderCharacterItem = ({item}: {item: Character}) => (
+    <CharacterCard
+      character={item}
+      onPress={() => navigation.navigate('CharacterDetail', {id: item.id})}
+    />
+  );
 
   return (
     <FlatList
@@ -64,12 +72,7 @@ function EpisodeDetailScreen() {
       }
       data={episode.characters}
       keyExtractor={item => item.id}
-      renderItem={({item}) => (
-        <CharacterCard
-          character={item}
-          onPress={() => navigation.navigate('CharacterDetail', {id: item.id})}
-        />
-      )}
+      renderItem={renderCharacterItem}
       style={styles.flatListContainer}
       contentContainerStyle={{
         paddingBottom: currentTheme.spacing.lg,
