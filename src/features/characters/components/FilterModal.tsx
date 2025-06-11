@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from 'react-native';
+import {useTranslation} from 'react-i18next';
 import {currentTheme} from '@theme';
 import {FilterModalProps} from '@features/characters/types/FilterModalTypes';
 
@@ -20,6 +21,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
   onApply,
   sections,
 }) => {
+  const {t} = useTranslation();
   return (
     <Modal
       visible={visible}
@@ -44,17 +46,17 @@ const FilterModal: React.FC<FilterModalProps> = ({
 
             <View style={styles.buttonsContainer}>
               <Button
-                title="Reset"
+                title={t('characterList.filterResetButton')}
                 onPress={onReset}
                 color={currentTheme.colors.backgroundButton}
               />
               <Button
-                title="Apply"
+                title={t('characterList.filterApplyButton')}
                 onPress={onApply}
                 color={currentTheme.colors.backgroundButton}
               />
               <Button
-                title="Close"
+                title={t('characterList.filterCloseButton')}
                 onPress={onClose}
                 color={currentTheme.colors.backgroundButton}
               />
