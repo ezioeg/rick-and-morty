@@ -50,13 +50,13 @@ function EpisodeDetailScreen() {
           />
 
           <Text style={styles.label}>
-            {t('episodeDetail.airDate')}:{' '}
-            <Text style={styles.value}>{episode.air_date}</Text>
+            {t('episodeDetail.episodeCode')}:{' '}
+            <Text style={styles.value}>{episode.episode}</Text>
           </Text>
 
           <Text style={styles.label}>
-            {t('episodeDetail.episodeCode')}:{' '}
-            <Text style={styles.value}>{episode.episode}</Text>
+            {t('episodeDetail.airDate')}:{' '}
+            <Text style={styles.value}>{episode.air_date}</Text>
           </Text>
 
           <Text style={styles.subtitle}>
@@ -74,6 +74,8 @@ function EpisodeDetailScreen() {
             <View style={styles.characterInfo}>
               <Text style={styles.characterName}>{item.name}</Text>
               <Text style={styles.characterSpecies}>{item.species}</Text>
+              <Text style={styles.characterStatus}>{item.status}</Text>
+              <Text style={styles.characterGender}>{item.gender}</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -137,6 +139,12 @@ const styles = StyleSheet.create({
     color: currentTheme.colors.textPrimary,
   },
   characterSpecies: {
+    color: currentTheme.colors.textSecondary,
+  },
+  characterStatus: {
+    color: currentTheme.colors.textSecondary,
+  },
+  characterGender: {
     color: currentTheme.colors.textSecondary,
   },
 });

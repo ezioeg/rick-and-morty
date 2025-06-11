@@ -8,6 +8,8 @@ const FILTER_CHARACTERS = gql`
         image
         name
         species
+        status
+        gender
       }
     }
   }
@@ -18,6 +20,8 @@ interface Character {
   image: string;
   name: string;
   species: string;
+  status: string;
+  gender: string;
 }
 
 interface FilterCharacterResponse {

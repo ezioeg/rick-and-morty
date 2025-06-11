@@ -5,6 +5,8 @@
       "error": "Error al cargar personajes",
       "filtersTitle": "Filtros de personajes",
       "filterByName": "Filtrar por nombre",
+      "filterBySpecies": "Filtrar por especie",
+      "filterByStatus": "Filtrar por estado",
       "filterResetButton": "Resetear",
       "filterApplyButton": "Aplicar",
       "filterCloseButton": "Cerrar"

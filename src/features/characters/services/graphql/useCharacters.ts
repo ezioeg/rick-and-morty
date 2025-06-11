@@ -11,6 +11,8 @@ const GET_CHARACTERS = gql`
         image
         name
         species
+        status
+        gender
       }
     }
   }
@@ -21,6 +23,8 @@ export interface Character {
   image: string;
   name: string;
   species: string;
+  status: string;
+  gender: string;
 }
 
 interface GetCharactersResponse {

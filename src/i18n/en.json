@@ -5,6 +5,8 @@
       "error": "Error loading characters",
       "filtersTitle": "Character Filters",
       "filterByName": "Filter by name",
+      "filterBySpecies": "Filter by species",
+      "filterByStatus": "Filter by status",
       "filterResetButton": "Reset",
       "filterApplyButton": "Apply",
       "filterCloseButton": "Close"

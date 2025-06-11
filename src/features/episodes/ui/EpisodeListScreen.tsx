@@ -82,6 +82,7 @@ function EpisodeListScreen() {
           <TouchableOpacity
             onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}>
             <View style={styles.item}>
+              <Text style={styles.title}>{item.episode}</Text>
               <Text style={styles.title}>{item.name}</Text>
               <Text style={styles.airDate}>{item.air_date}</Text>
             </View>

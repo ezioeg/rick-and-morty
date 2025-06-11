@@ -12,6 +12,8 @@ const GET_EPISODE_BY_ID = gql`
         image
         name
         species
+        status
+        gender
       }
     }
   }
@@ -22,6 +24,8 @@ interface Character {
   image: string;
   name: string;
   species: string;
+  status: string;
+  gender: string;
 }
 
 interface EpisodeDetail {

@@ -80,6 +80,7 @@ function CharacterDetailScreen() {
         <TouchableOpacity
           onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}>
           <View style={styles.episodeItem}>
+            <Text style={styles.episodeTitle}>{item.episode}</Text>
             <Text style={styles.episodeTitle}>{item.name}</Text>
             <Text style={styles.episodeAirDate}>{item.air_date}</Text>
           </View>

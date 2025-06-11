@@ -30,14 +30,14 @@ function CharacterListScreen() {
   const [nextPage, setNextPage] = useState<number | null>(2);
   const [isFetchingMore, setIsFetchingMore] = useState(false);
 
-  // Estados para filtros
   const [nameFilter, setNameFilter] = useState('');
   const [speciesFilter, setSpeciesFilter] = useState('Todos');
+  const [statusFilter, setStatusFilter] = useState('Todos');
 
-  // Estado para modal y filtros temporales
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
   const [tempNameFilter, setTempNameFilter] = useState('');
   const [tempSpeciesFilter, setTempSpeciesFilter] = useState('Todos');
+  const [tempStatusFilter, setTempStatusFilter] = useState('Todos');
 
   useEffect(() => {
     if (data?.characters?.results) {
@@ -48,13 +48,14 @@ function CharacterListScreen() {
 
   useEffect(() => {
     setIsFetchingMore(false);
-  }, [nameFilter, speciesFilter]);
+  }, [nameFilter, speciesFilter, statusFilter]);
 
   const handleLoadMore = async () => {
-    const isFiltering = nameFilter.trim() !== '' || speciesFilter !== 'Todos';
-    if (!nextPage || isFetchingMore || isFiltering) {
-      return;
-    }
+    const isFiltering =
+      nameFilter.trim() !== '' ||
+      speciesFilter !== 'Todos' ||
+      statusFilter !== 'Todos';
+    if (!nextPage || isFetchingMore || isFiltering) return;
 
     setIsFetchingMore(true);
     try {
@@ -75,34 +76,22 @@ function CharacterListScreen() {
     setIsFetchingMore(false);
   };
 
-  // Obtener lista única de especies + "Todos"
   const speciesOptions = useMemo(() => {
     const speciesSet = new Set(characters.map(c => c.species));
     return ['Todos', ...Array.from(speciesSet).sort()];
   }, [characters]);
 
-  // const ALL_SPECIES = [
-  //   'Todos',
-  //   'Alien',
-  //   'Animal',
-  //   'Cronenberg',
-  //   'Disease',
-  //   'Human',
-  //   'Humanoid',
-  //   'Mythological Creature',
-  //   'Poopybutthole',
-  //   'Robot',
-  //   'unknown',
-  // ];
+  const STATUS_OPTIONS = ['Todos', 'Alive', 'Dead', 'unknown'];
 
-  // const speciesOptions = ALL_SPECIES;
-
-  // Filtrar y ordenar personajes según filtros aplicados (no temporales)
   const filteredCharacters = useMemo(() => {
     let filtered = characters;
 
     if (speciesFilter !== 'Todos') {
       filtered = filtered.filter(c => c.species === speciesFilter);
+    }
+
+    if (statusFilter !== 'Todos') {
+      filtered = filtered.filter(c => c.status === statusFilter);
     }
 
     if (nameFilter.trim() !== '') {
@@ -111,10 +100,8 @@ function CharacterListScreen() {
       );
     }
 
-    filtered = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
-
-    return filtered;
-  }, [characters, speciesFilter, nameFilter]);
+    return [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+  }, [characters, speciesFilter, statusFilter, nameFilter]);
 
   if (loading && characters.length === 0) {
     return <Loader message={t('characterList.loading')} />;
@@ -124,22 +111,24 @@ function CharacterListScreen() {
     return <ErrorMessage message={t('characterList.error')} />;
   }
 
-  // Funciones para el modal de filtros
   const openFilterModal = () => {
     setTempNameFilter(nameFilter);
     setTempSpeciesFilter(speciesFilter);
+    setTempStatusFilter(statusFilter);
     setIsFilterModalVisible(true);
   };
 
   const applyFilters = () => {
     setNameFilter(tempNameFilter);
     setSpeciesFilter(tempSpeciesFilter);
+    setStatusFilter(tempStatusFilter);
     setIsFilterModalVisible(false);
   };
 
   const resetFilters = () => {
     setTempNameFilter('');
     setTempSpeciesFilter('Todos');
+    setTempStatusFilter('Todos');
   };
 
   return (
@@ -171,6 +160,8 @@ function CharacterListScreen() {
               <View style={styles.textContainer}>
                 <Text style={styles.name}>{item.name}</Text>
                 <Text style={styles.species}>{item.species}</Text>
+                <Text style={styles.status}>{item.status}</Text>
+                <Text style={styles.gender}>{item.gender}</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -180,7 +171,6 @@ function CharacterListScreen() {
         ListFooterComponent={isFetchingMore ? <Loader /> : null}
       />
 
-      {/* Modal de filtros */}
       <Modal
         visible={isFilterModalVisible}
         animationType="slide"
@@ -192,6 +182,9 @@ function CharacterListScreen() {
               {t('characterList.filtersTitle')}
             </Text>
 
+            <Text style={styles.filterSectionTitle}>
+              {t('characterList.filterByName')}
+            </Text>
             <TextInput
               placeholder={t('characterList.filterByName')}
               placeholderTextColor={currentTheme.colors.textSecondary}
@@ -202,6 +195,9 @@ function CharacterListScreen() {
               autoCapitalize="none"
             />
 
+            <Text style={styles.filterSectionTitle}>
+              {t('characterList.filterBySpecies')}
+            </Text>
             <View style={styles.speciesFilterContainer}>
               {speciesOptions.map(species => (
                 <TouchableOpacity
@@ -224,6 +220,30 @@ function CharacterListScreen() {
               ))}
             </View>
 
+            <Text style={styles.filterSectionTitle}>
+              {t('characterList.filterByStatus')}
+            </Text>
+            <View style={styles.speciesFilterContainer}>
+              {STATUS_OPTIONS.map(status => (
+                <TouchableOpacity
+                  key={status}
+                  style={[
+                    styles.speciesOption,
+                    tempStatusFilter === status && styles.speciesOptionSelected,
+                  ]}
+                  onPress={() => setTempStatusFilter(status)}>
+                  <Text
+                    style={
+                      tempStatusFilter === status
+                        ? styles.speciesTextSelected
+                        : styles.speciesText
+                    }>
+                    {status}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+
             <View style={styles.modalButtonsContainer}>
               <Button
                 title={t('characterList.filterResetButton')}
@@ -232,13 +252,13 @@ function CharacterListScreen() {
               />
               <Button
                 title={t('characterList.filterApplyButton')}
-                color={currentTheme.colors.textPrimary}
                 onPress={applyFilters}
+                color={currentTheme.colors.textPrimary}
               />
               <Button
                 title={t('characterList.filterCloseButton')}
-                color={currentTheme.colors.textPrimary}
                 onPress={() => setIsFilterModalVisible(false)}
+                color={currentTheme.colors.textPrimary}
               />
             </View>
           </View>
@@ -254,34 +274,34 @@ const styles = StyleSheet.create({
     paddingHorizontal: currentTheme.spacing.lg,
     backgroundColor: currentTheme.colors.background,
   },
-
   item: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: currentTheme.spacing.lg,
   },
-
   image: {
     width: 60,
     height: 60,
     borderRadius: currentTheme.border.radius,
     marginRight: currentTheme.spacing.md,
   },
-
   textContainer: {
     flex: 1,
   },
-
   name: {
     fontSize: currentTheme.typography.subtitle,
     fontWeight: 'bold',
     color: currentTheme.colors.textPrimary,
   },
-
   species: {
     color: currentTheme.colors.textSecondary,
   },
-
+  status: {
+    color: currentTheme.colors.textSecondary,
+  },
+  gender: {
+    color: currentTheme.colors.textSecondary,
+  },
   input: {
     borderWidth: 1,
     borderColor: currentTheme.colors.border,
@@ -291,13 +311,11 @@ const styles = StyleSheet.create({
     marginBottom: currentTheme.spacing.md,
     color: currentTheme.colors.textPrimary,
   },
-
   speciesFilterContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginBottom: currentTheme.spacing.md,
   },
-
   speciesOption: {
     paddingVertical: 6,
     paddingHorizontal: 12,
@@ -307,33 +325,27 @@ const styles = StyleSheet.create({
     marginRight: currentTheme.spacing.sm,
     marginBottom: currentTheme.spacing.sm,
   },
-
   speciesOptionSelected: {
     backgroundColor: currentTheme.colors.accent,
     borderColor: currentTheme.colors.accent,
   },
-
   speciesText: {
     color: currentTheme.colors.textSecondary,
   },
-
   speciesTextSelected: {
     color: '#fff',
   },
-
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
     paddingHorizontal: currentTheme.spacing.lg,
   },
-
   modalContainer: {
     backgroundColor: currentTheme.colors.background,
     borderRadius: 12,
     padding: currentTheme.spacing.lg,
   },
-
   modalTitle: {
     fontSize: currentTheme.typography.title,
     fontWeight: 'bold',
@@ -341,7 +353,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: currentTheme.colors.textPrimary,
   },
-
+  filterSectionTitle: {
+    fontSize: currentTheme.typography.subtitle,
+    marginBottom: currentTheme.spacing.md,
+    color: currentTheme.colors.textPrimary,
+  },
   modalButtonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
