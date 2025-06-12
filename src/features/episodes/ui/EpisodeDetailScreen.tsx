@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -27,6 +27,16 @@ function EpisodeDetailScreen() {
   const {data, loading, error} = useEpisodeById(id);
   const {t} = useTranslation();
 
+  const renderCharacterItem = useCallback(
+    ({item}: {item: Character}) => (
+      <CharacterCard
+        character={item}
+        onPress={() => navigation.navigate('CharacterDetail', {id: item.id})}
+      />
+    ),
+    [navigation],
+  );
+
   if (loading) {
     return <Loader message={t('episodeDetail.loading')} />;
   }
@@ -39,13 +49,6 @@ function EpisodeDetailScreen() {
   if (!episode) {
     return <ErrorMessage message={t('episodeDetail.notFound')} />;
   }
-
-  const renderCharacterItem = ({item}: {item: Character}) => (
-    <CharacterCard
-      character={item}
-      onPress={() => navigation.navigate('CharacterDetail', {id: item.id})}
-    />
-  );
 
   return (
     <FlatList

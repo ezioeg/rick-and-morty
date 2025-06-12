@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {
   View,
   Text,
@@ -50,7 +50,17 @@ function CharacterListScreen() {
     }
   }, [data]);
 
-  const handleLoadMore = async () => {
+  const renderCharacterItem = useCallback(
+    ({item}: {item: Character}) => (
+      <CharacterCardMain
+        character={item}
+        onPress={() => navigation.navigate('CharacterDetail', {id: item.id})}
+      />
+    ),
+    [navigation],
+  );
+
+  const handleLoadMore = useCallback(async () => {
     const isFiltering =
       nameFilter.trim() !== '' ||
       speciesFilter !== 'Todos' ||
@@ -66,13 +76,19 @@ function CharacterListScreen() {
       const newNext = moreData?.characters?.info?.next;
 
       setCharacters(prev => mergeUniqueCharacters(prev, newResults));
-
       setNextPage(newNext);
     } catch (e) {
       console.error('Failed to fetch more characters', e);
     }
     setIsFetchingMore(false);
-  };
+  }, [
+    nameFilter,
+    speciesFilter,
+    statusFilter,
+    nextPage,
+    isFetchingMore,
+    fetchMore,
+  ]);
 
   const speciesOptions = useMemo(
     () => getUniqueSpeciesOptions(characters),
@@ -118,13 +134,6 @@ function CharacterListScreen() {
     setTempSpeciesFilter('Todos');
     setTempStatusFilter('Todos');
   };
-
-  const renderCharacterItem = ({item}: {item: Character}) => (
-    <CharacterCardMain
-      character={item}
-      onPress={() => navigation.navigate('CharacterDetail', {id: item.id})}
-    />
-  );
 
   return (
     <View style={styles.container}>

@@ -1,33 +1,29 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {currentTheme} from '@theme';
 import {Character} from '@features/characters/services/graphql/useCharacters';
 
-const CharacterCard = ({
-  character,
-  onPress,
-}: {
-  character: Character;
-  onPress: () => void;
-}) => (
-  <TouchableOpacity
-    onPress={onPress}
-    accessibilityRole="button"
-    testID="touchable-button">
-    <View style={styles.characterItem}>
-      <Image source={{uri: character.image}} style={styles.image} />
-      <View style={styles.characterInfo}>
-        <Text style={styles.characterName}>{character.name}</Text>
-        <Text style={styles.characterSpecies}>
-          {character.species.toUpperCase()}
-        </Text>
-        <View style={styles.statusGenderRow}>
-          <Text style={styles.characterStatus}>{character.status}</Text>
-          <Text style={styles.characterGender}>{character.gender}</Text>
+const CharacterCard = memo(
+  ({character, onPress}: {character: Character; onPress: () => void}) => (
+    <TouchableOpacity
+      onPress={onPress}
+      accessibilityRole="button"
+      testID="touchable-button">
+      <View style={styles.characterItem}>
+        <Image source={{uri: character.image}} style={styles.image} />
+        <View style={styles.characterInfo}>
+          <Text style={styles.characterName}>{character.name}</Text>
+          <Text style={styles.characterSpecies}>
+            {character.species.toUpperCase()}
+          </Text>
+          <View style={styles.statusGenderRow}>
+            <Text style={styles.characterStatus}>{character.status}</Text>
+            <Text style={styles.characterGender}>{character.gender}</Text>
+          </View>
         </View>
       </View>
-    </View>
-  </TouchableOpacity>
+    </TouchableOpacity>
+  ),
 );
 
 const styles = StyleSheet.create({

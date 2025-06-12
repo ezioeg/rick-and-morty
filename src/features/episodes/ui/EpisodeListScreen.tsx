@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
@@ -29,7 +29,17 @@ function EpisodeListScreen() {
     }
   }, [data]);
 
-  const handleLoadMore = async () => {
+  const renderEpisodeItem = useCallback(
+    ({item}: {item: Episode}) => (
+      <EpisodeCardMain
+        episode={item}
+        onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}
+      />
+    ),
+    [navigation],
+  );
+
+  const handleLoadMore = useCallback(async () => {
     if (!nextPage || isFetchingMore) {
       return;
     }
@@ -54,7 +64,7 @@ function EpisodeListScreen() {
       console.error('Failed to fetch more episodes', e);
     }
     setIsFetchingMore(false);
-  };
+  }, [nextPage, isFetchingMore, fetchMore]);
 
   if (loading && episodes.length === 0) {
     return <Loader message={t('episodeList.loading')} />;
@@ -63,13 +73,6 @@ function EpisodeListScreen() {
   if (error && episodes.length === 0) {
     return <ErrorMessage message={t('episodeList.error')} />;
   }
-
-  const renderEpisodeItem = ({item}: {item: Episode}) => (
-    <EpisodeCardMain
-      episode={item}
-      onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}
-    />
-  );
 
   return (
     <View style={styles.container}>
