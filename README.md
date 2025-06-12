@@ -1,56 +1,26 @@
-# RickAndMorty App
-RickAndMorty App is a mobile application built with React Native CLI. It allows users to explore characters and episodes from the Rick and Morty series using the Rick and Morty GraphQL API.
+## RickAndMorty App  
+Mobile application developed with React Native CLI. It allows users to explore characters and episodes from the Rick and Morty series using the Rick and Morty GraphQL API.
 
-## Features
+### Features  
+- **Character List**  
+  Paginated list of characters with filters by name, species, and status.  
+  - Each item shows image, name, and species.  
+  - Reset options available for filters.
 
-### Character List
+- **Character Detail**  
+  Displays full character information: name, image, species, gender, status, last known location, and episodes.
 
-- Paginated list of characters from the Rick and Morty universe.
-- Each item includes:
-  - Character image.
-  - Name.
-  - Species.
-- Filter options:
-  - **Name**: Alphabetical search by character name.
-  - **Species**: Filter by species with a reset option to show all.
-  - **Status**: Filter by status (Alive, Dead, Unknown), also with a reset option.
+- **Episode List**  
+  Scrollable list of episodes including episode name and air date.
 
-### Character Detail
+- **Episode Detail**  
+  Displays detailed episode info: name, air date, episode code, and character list.
 
-- Displays detailed information about the selected character:
-  - Name
-  - Image
-  - Species
-  - Gender
-  - Status
-  - Last known location
-  - List of episodes where the character appears
+- **Internationalization**  
+  Supports English and Spanish with a toggle button in the UI.
 
-### Episode List
-
-- Scrollable list of episodes including:
-  - Episode name
-  - Air date
-
-### Episode Detail
-
-- Displays detailed information about the selected episode:
-  - Name
-  - Air date
-  - Episode code (e.g., S01E01)
-  - List of characters featured in the episode
-
-### Internationalization & Theming
-
-- **Internationalization**:  
-  The app supports both **English** and **Spanish** languages. Users can dynamically switch languages using a language toggle button available in the UI.
-  
-- **Theming**:  
-  The app includes **4 manually switchable themes**:
-  - `lightTheme`
-  - `darkTheme`
-  - `portalTheme`
-  - `multiverseTheme`
+- **Theming**  
+  Includes four switchable themes: `light`, `dark`, `portal`, and `multiverse`.
 
 ## Technologies Used
 ### Core
