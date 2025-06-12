@@ -1,5 +1,5 @@
 # RickAndMorty App
-RickAndMorty App is a technical test using React Native CLI. The goal is to create an app that allows users to explore characters and episodes from the Rick and Morty series using the Rick and Morty GraphQL API.
+RickAndMorty App is a technical test using React Native CLI. The goal is to create an app that allows users to explore characters and episodes from the Rick and Morty series using the Rick and Morty [GraphQL API](https://rickandmortyapi.com/graphql).
 
 ## Features
 
