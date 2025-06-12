@@ -74,8 +74,8 @@ RickAndMorty App is a technical test using React Native CLI. The goal is to crea
 - [react-i18next](https://react.i18next.com/) `^15.5.2`
 
 ### Testing
-- [Jest](https://jestjs.io/)
-- [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)
+- [Jest](https://jestjs.io/) `^29.6.3`
+- [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) `^13.2.0`
 
 ## Setup
 Install dependencies:
