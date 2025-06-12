@@ -1,7 +1,6 @@
 import React, {useCallback} from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useRoute} from '@react-navigation/native';
 import {useEpisodeById} from '@features/episodes/services/graphql';
 import {
   Header,
@@ -10,31 +9,21 @@ import {
   PropertyRow,
   SectionTitle,
 } from '@shared/components';
-import {
-  RootStackParamList,
-  EpisodeDetailRouteProp,
-} from '@shared/types/RootStackParamListTypes';
+import {EpisodeDetailRouteProp} from '@shared/types/RootStackParamListTypes';
 import {currentTheme} from '@theme';
 import {useTranslation} from 'react-i18next';
 import CharacterCard from '../components/CharacterCard';
 import {Character} from '@features/characters/services/graphql/useCharacters';
 
 function EpisodeDetailScreen() {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const {params} = useRoute<EpisodeDetailRouteProp>();
   const {id} = params;
   const {data, loading, error} = useEpisodeById(id);
   const {t} = useTranslation();
 
   const renderCharacterItem = useCallback(
-    ({item}: {item: Character}) => (
-      <CharacterCard
-        character={item}
-        onPress={() => navigation.navigate('CharacterDetail', {id: item.id})}
-      />
-    ),
-    [navigation],
+    ({item}: {item: Character}) => <CharacterCard character={item} />,
+    [],
   );
 
   if (loading) {

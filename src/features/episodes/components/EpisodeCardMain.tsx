@@ -1,17 +1,20 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Episode} from '@features/episodes/services/graphql/useEpisodes';
 import {currentTheme} from '@theme';
+import {RootStackParamList} from '@shared/types/RootStackParamListTypes';
 
-const EpisodeCardMain = ({
-  episode,
-  onPress,
-}: {
-  episode: Episode;
-  onPress: () => void;
-}) => {
+const EpisodeCardMain = ({episode}: {episode: Episode}) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const handlePress = () =>
+    navigation.navigate('EpisodeDetail', {id: episode.id});
+
   return (
-    <TouchableOpacity onPress={onPress} testID="episode-card-touchable">
+    <TouchableOpacity onPress={handlePress} testID="episode-card-touchable">
       <View style={styles.item}>
         <View style={styles.headerRow}>
           <Text style={styles.episode}>{episode.episode}</Text>
@@ -22,6 +25,13 @@ const EpisodeCardMain = ({
     </TouchableOpacity>
   );
 };
+
+function areEqual(
+  prevProps: {episode: Episode},
+  nextProps: {episode: Episode},
+) {
+  return prevProps.episode.id === nextProps.episode.id;
+}
 
 const styles = StyleSheet.create({
   item: {
@@ -56,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EpisodeCardMain;
+export default memo(EpisodeCardMain, areEqual);

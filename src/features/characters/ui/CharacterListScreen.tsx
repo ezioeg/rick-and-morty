@@ -7,12 +7,9 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useCharacters} from '@features/characters/services/graphql';
 import {Header, Loader, ErrorMessage} from '@shared/components';
 import {SearchCharacterIcon} from '@shared/components/icons';
-import {RootStackParamList} from '@shared/types/RootStackParamListTypes';
 import {currentTheme} from '@theme';
 import {useTranslation} from 'react-i18next';
 import {Character} from '@features/characters/services/graphql/useCharacters';
@@ -25,8 +22,6 @@ import {
 } from '@features/characters/utils';
 
 function CharacterListScreen() {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const {t} = useTranslation();
 
   const {data, loading, error, fetchMore} = useCharacters(1);
@@ -51,13 +46,8 @@ function CharacterListScreen() {
   }, [data]);
 
   const renderCharacterItem = useCallback(
-    ({item}: {item: Character}) => (
-      <CharacterCardMain
-        character={item}
-        onPress={() => navigation.navigate('CharacterDetail', {id: item.id})}
-      />
-    ),
-    [navigation],
+    ({item}: {item: Character}) => <CharacterCardMain character={item} />,
+    [],
   );
 
   const handleLoadMore = useCallback(async () => {

@@ -1,12 +1,21 @@
 import React, {memo} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import {currentTheme} from '@theme';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Character} from '@features/characters/services/graphql/useCharacters';
+import {currentTheme} from '@theme';
+import {RootStackParamList} from '@shared/types/RootStackParamListTypes';
 
-const CharacterCard = memo(
-  ({character, onPress}: {character: Character; onPress: () => void}) => (
+const CharacterCard = ({character}: {character: Character}) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const handlePress = () =>
+    navigation.navigate('CharacterDetail', {id: character.id});
+
+  return (
     <TouchableOpacity
-      onPress={onPress}
+      onPress={handlePress}
       accessibilityRole="button"
       testID="touchable-button">
       <View style={styles.characterItem}>
@@ -23,8 +32,19 @@ const CharacterCard = memo(
         </View>
       </View>
     </TouchableOpacity>
-  ),
-);
+  );
+};
+
+function areEqual(
+  prev: {
+    character: Character;
+  },
+  next: {
+    character: Character;
+  },
+) {
+  return prev.character.id === next.character.id;
+}
 
 const styles = StyleSheet.create({
   characterItem: {
@@ -68,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CharacterCard;
+export default memo(CharacterCard, areEqual);

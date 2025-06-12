@@ -1,19 +1,14 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useEpisodes} from '@features/episodes/services/graphql';
 import {SearchEpisodeIcon} from '@shared/components/icons';
 import {Header, Loader, ErrorMessage} from '@shared/components';
-import {RootStackParamList} from '@shared/types/RootStackParamListTypes';
 import {currentTheme} from '@theme';
 import {useTranslation} from 'react-i18next';
 import {Episode} from '@features/episodes/services/graphql/useEpisodes';
 import EpisodeCardMain from '../components/EpisodeCardMain';
 
 function EpisodeListScreen() {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const {t} = useTranslation();
 
   const [episodes, setEpisodes] = useState<Episode[]>([]);
@@ -30,13 +25,8 @@ function EpisodeListScreen() {
   }, [data]);
 
   const renderEpisodeItem = useCallback(
-    ({item}: {item: Episode}) => (
-      <EpisodeCardMain
-        episode={item}
-        onPress={() => navigation.navigate('EpisodeDetail', {id: item.id})}
-      />
-    ),
-    [navigation],
+    ({item}: {item: Episode}) => <EpisodeCardMain episode={item} />,
+    [],
   );
 
   const handleLoadMore = useCallback(async () => {
