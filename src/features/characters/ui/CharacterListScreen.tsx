@@ -55,7 +55,9 @@ function CharacterListScreen() {
       nameFilter.trim() !== '' ||
       speciesFilter !== 'Todos' ||
       statusFilter !== 'Todos';
-    if (!nextPage || isFetchingMore || isFiltering) return;
+    if (!nextPage || isFetchingMore || isFiltering) {
+      return;
+    }
 
     setIsFetchingMore(true);
     try {
@@ -129,17 +131,14 @@ function CharacterListScreen() {
       <Header
         title={t('characterList.title')}
         showBackButton={false}
-        showRightIcon={true}
-        RightIconComponent={() => (
-          <TouchableOpacity onPress={openFilterModal}>
-            <SearchCharacterIcon
-              size={24}
-              color={currentTheme.colors.textPrimary}
-            />
-          </TouchableOpacity>
-        )}
+        rightIcon={
+          <SearchCharacterIcon
+            size={24}
+            color={currentTheme.colors.textPrimary}
+          />
+        }
+        onRightIconPress={openFilterModal}
       />
-
       <FlatList
         data={filteredCharacters}
         keyExtractor={item => item.id.toString()}

@@ -51,11 +51,7 @@ function EpisodeDetailScreen() {
     <FlatList
       ListHeaderComponent={
         <View style={styles.container}>
-          <Header
-            title={episode.name}
-            showBackButton={true}
-            showRightIcon={false}
-          />
+          <Header title={episode.name} showBackButton={true} />
 
           <View style={styles.propertiesContainer}>
             <PropertyRow

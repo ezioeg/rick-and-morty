@@ -8,8 +8,8 @@ import {currentTheme} from '@theme';
 const Header = ({
   title,
   showBackButton = false,
-  showRightIcon = false,
-  RightIconComponent,
+  rightIcon,
+  onRightIconPress,
 }: HeaderProps) => {
   const navigation = useNavigation();
 
@@ -25,12 +25,9 @@ const Header = ({
 
       <Text style={styles.title}>{title}</Text>
 
-      {showRightIcon && RightIconComponent ? (
-        <TouchableOpacity onPress={() => {}}>
-          <RightIconComponent
-            size={24}
-            color={currentTheme.colors.textPrimary}
-          />
+      {rightIcon ? (
+        <TouchableOpacity onPress={onRightIconPress}>
+          {rightIcon}
         </TouchableOpacity>
       ) : (
         <View style={styles.placeholder} />

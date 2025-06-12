@@ -53,11 +53,7 @@ function CharacterDetailScreen() {
     <FlatList
       ListHeaderComponent={
         <View style={styles.container}>
-          <Header
-            title={character.name}
-            showBackButton={true}
-            showRightIcon={false}
-          />
+          <Header title={character.name} showBackButton={true} />
           <CharacterImage
             imageUri={character.image}
             status={character.status}

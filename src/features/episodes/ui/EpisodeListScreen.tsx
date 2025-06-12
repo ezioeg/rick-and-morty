@@ -30,7 +30,9 @@ function EpisodeListScreen() {
   }, [data]);
 
   const handleLoadMore = async () => {
-    if (!nextPage || isFetchingMore) return;
+    if (!nextPage || isFetchingMore) {
+      return;
+    }
 
     setIsFetchingMore(true);
     try {
@@ -74,8 +76,12 @@ function EpisodeListScreen() {
       <Header
         title={t('episodeList.title')}
         showBackButton={false}
-        showRightIcon={true}
-        RightIconComponent={SearchEpisodeIcon}
+        rightIcon={
+          <SearchEpisodeIcon
+            size={24}
+            color={currentTheme.colors.textPrimary}
+          />
+        }
       />
       <FlatList
         data={episodes}
