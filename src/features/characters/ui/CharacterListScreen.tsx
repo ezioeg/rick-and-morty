@@ -50,10 +50,6 @@ function CharacterListScreen() {
     }
   }, [data]);
 
-  useEffect(() => {
-    setIsFetchingMore(false);
-  }, [nameFilter, speciesFilter, statusFilter]);
-
   const handleLoadMore = async () => {
     const isFiltering =
       nameFilter.trim() !== '' ||
@@ -112,6 +108,7 @@ function CharacterListScreen() {
     setSpeciesFilter(tempSpeciesFilter);
     setStatusFilter(tempStatusFilter);
     setIsFilterModalVisible(false);
+    setIsFetchingMore(false);
   };
 
   const resetFilters = () => {
