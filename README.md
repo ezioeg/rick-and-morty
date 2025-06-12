@@ -54,7 +54,7 @@ RickAndMorty App is a technical test using React Native CLI. The goal is to crea
 
 ## Technologies Used
 ### Core
-- [React Native](https://reactnative.dev/) `0.79.3`
+- [React Native](https://reactnative.dev/) `v0.79.3`
 - [React](https://reactjs.org/) `v19.0.0`
 - [React Navigation Native](https://reactnavigation.org/docs/getting-started) `v7.1.10`
 - [React Navigation Native Stack](https://reactnavigation.org/docs/native-stack-navigator) `v7.3.14`
@@ -67,15 +67,15 @@ RickAndMorty App is a technical test using React Native CLI. The goal is to crea
 
 ### State Management & Persist
 - [Zustand](https://github.com/pmndrs/zustand) `v5.0.5` – used to store language preferences with persistent state.
-- [@react-native-async-storage/async-storage](https://github.com/react-native-async-storage/async-storage) `2.2.0`
+- [@react-native-async-storage/async-storage](https://github.com/react-native-async-storage/async-storage) `v2.2.0`
 
 ### Internationalization
-- [i18next](https://www.i18next.com/) `25.2.1`
-- [react-i18next](https://react.i18next.com/) `15.5.2`
+- [i18next](https://www.i18next.com/) `v25.2.1`
+- [react-i18next](https://react.i18next.com/) `v15.5.2`
 
 ### Testing
-- [Jest](https://jestjs.io/) `29.6.3`
-- [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) `13.2.0`
+- [Jest](https://jestjs.io/) `v29.6.3`
+- [React Native Testing Library](https://callstack.github.io/react-native-testing-library/) `v13.2.0`
 
 ## Setup
 Install dependencies:
