@@ -40,6 +40,18 @@ RickAndMorty App is a technical test using React Native CLI. The goal is to crea
   - Episode code (e.g., S01E01)
   - List of characters featured in the episode
 
+### Internationalization & Theming
+
+- **Internationalization**:  
+  The app supports both **English** and **Spanish** languages. Users can dynamically switch languages using a language toggle button available in the UI.
+  
+- **Theming**:  
+  The app includes **4 manually switchable themes**:
+  - `lightTheme`
+  - `darkTheme`
+  - `portalTheme`
+  - `multiverseTheme`
+
 ## Technologies Used
 ### Core
 - [React Native](https://reactnative.dev/) `0.79.3`
@@ -53,8 +65,13 @@ RickAndMorty App is a technical test using React Native CLI. The goal is to crea
 ### UI/Styling
 - [React Native Svg](https://github.com/react-native-svg/react-native-svg) `v15.12.0`
 
-### State Management
-- [Zustand](https://github.com/pmndrs/zustand)
+### State Management & Persist
+- [Zustand](https://github.com/pmndrs/zustand) `v5.0.5` – used to store language preferences with persistent state.
+- [@react-native-async-storage/async-storage](https://github.com/react-native-async-storage/async-storage) `^2.2.0`
+
+### Internationalization
+- [i18next](https://www.i18next.com/) `^25.2.1`
+- [react-i18next](https://react.i18next.com/) `^15.5.2`
 
 ### Testing
 - [Jest](https://jestjs.io/)
@@ -111,6 +128,8 @@ yarn ios
 To run unit tests:
 
 ```bash
+npm test
+# OR using
 npm run test
 ```
 > **Note**  
