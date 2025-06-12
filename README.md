@@ -1,4 +1,4 @@
-## RickAndMorty App  
+## 🔬 RickAndMorty App  
 Mobile application developed with React Native CLI. It allows users to explore characters and episodes from the Rick and Morty series using the Rick and Morty GraphQL API.
 
 ### Features  
