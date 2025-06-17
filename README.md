@@ -7,13 +7,13 @@ Mobile application developed with React Native CLI. It allows users to explore c
   - Each item shows image, name, and species.  
   - Reset options available for filters.
 
-- **Character Detail**  
+- **Character Details**  
   Displays full character information: name, image, species, gender, status, last known location, and episodes.
 
 - **Episode List**  
   Scrollable list of episodes including episode name and air date.
 
-- **Episode Detail**  
+- **Episode Details**  
   Displays detailed episode info: name, air date, episode code, and character list.
 
 - **Internationalization**  
