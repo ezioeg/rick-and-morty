@@ -25,30 +25,30 @@ Mobile application developed with React Native CLI. It allows users to explore c
 <details>
   <summary>📱 Android screenshots</summary>
   <p>
-    <img src="https://github.com/user-attachments/assets/c218f6c8-8215-4833-b076-93338c68e479" alt="Character List" width="400"/>
-    <img src="https://github.com/user-attachments/assets/212cbbf6-fed8-4042-9d61-1df4cce8e11d" alt="Character Details" width="400"/>
+    <img src="https://github.com/user-attachments/assets/c218f6c8-8215-4833-b076-93338c68e479" alt="Android Character List" width="400"/>
+    <img src="https://github.com/user-attachments/assets/212cbbf6-fed8-4042-9d61-1df4cce8e11d" alt="Android Character Details" width="400"/>
   </p>
   <p>
-    <img src="https://github.com/user-attachments/assets/139fe2be-b2dc-4d18-90fe-198bf704316d" alt="Character Filters" width="400"/>
-    <img src="https://github.com/user-attachments/assets/14eac77a-a6a1-46f7-a59d-478e59411b13" alt="Episode List" width="400"/>
+    <img src="https://github.com/user-attachments/assets/139fe2be-b2dc-4d18-90fe-198bf704316d" alt="Android Character Filters" width="400"/>
+    <img src="https://github.com/user-attachments/assets/14eac77a-a6a1-46f7-a59d-478e59411b13" alt="Android Episode List" width="400"/>
   </p>
   <p>
-    <img src="https://github.com/user-attachments/assets/cfc1c66e-15c3-437b-a13f-a1ff88a12080" alt="Episode Details" width="400"/>
+    <img src="https://github.com/user-attachments/assets/cfc1c66e-15c3-437b-a13f-a1ff88a12080" alt="Android Episode Details" width="400"/>
   </p>
 </details>
 
 <details>
   <summary>📱 iOS screenshots</summary>
   <p>
-    <img src="https://github.com/user-attachments/assets/7c4738c0-605b-43ea-a85a-045ac9f2c8eb" alt="Character List iOS" width="400"/>
-    <img src="https://github.com/user-attachments/assets/ac687653-2462-4a36-a8e4-2e93ce46ecd0" alt="Character Details iOS" width="400"/>
+    <img src="https://github.com/user-attachments/assets/7c4738c0-605b-43ea-a85a-045ac9f2c8eb" alt="iOS Character List" width="400"/>
+    <img src="https://github.com/user-attachments/assets/ac687653-2462-4a36-a8e4-2e93ce46ecd0" alt="iOS Character Details" width="400"/>
   </p>
   <p>
-    <img src="https://github.com/user-attachments/assets/4d687c63-647a-47a0-afba-9706517c2fc9" alt="Character Filters iOS" width="400"/>
-    <img src="https://github.com/user-attachments/assets/2329a9bc-7ec7-48cb-a895-f141e789a7b6" alt="Episode List iOS" width="400"/>
+    <img src="https://github.com/user-attachments/assets/4d687c63-647a-47a0-afba-9706517c2fc9" alt="iOS Character Filters" width="400"/>
+    <img src="https://github.com/user-attachments/assets/2329a9bc-7ec7-48cb-a895-f141e789a7b6" alt="iOS Episode List" width="400"/>
   </p>
   <p>
-    <img src="https://github.com/user-attachments/assets/682d4471-8e18-4a3e-a3b8-2875aa31325f" alt="Episode Details iOS" width="400"/>
+    <img src="https://github.com/user-attachments/assets/682d4471-8e18-4a3e-a3b8-2875aa31325f" alt="iOS Episode Details" width="400"/>
   </p>
 </details>
 
