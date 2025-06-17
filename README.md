@@ -40,16 +40,15 @@ Mobile application developed with React Native CLI. It allows users to explore c
 <details>
   <summary>📱 iOS screenshots</summary>
   <p>
-    <img src="https://github.com/user-attachments/assets/9c2f536a-463c-46c0-9289-a2af504ec881" alt="iOS Screenshot 1" width="400"/>
-    <img src="https://github.com/user-attachments/assets/8d81ce98-8bff-4dfe-92ca-eec71279dee2" alt="iOS Screenshot 2" width="400"/>
+    <img src="https://github.com/user-attachments/assets/7c4738c0-605b-43ea-a85a-045ac9f2c8eb" alt="Character List iOS" width="400"/>
+    <img src="https://github.com/user-attachments/assets/ac687653-2462-4a36-a8e4-2e93ce46ecd0" alt="Character Details iOS" width="400"/>
   </p>
   <p>
-    <img src="https://github.com/user-attachments/assets/1d048793-c026-4789-bda5-a82007b3965f" alt="iOS Screenshot 3" width="400"/>
-    <img src="https://github.com/user-attachments/assets/a8c8cf8f-63a2-477f-a408-cd18ce9bbad3" alt="iOS Screenshot 4" width="400"/>
+    <img src="https://github.com/user-attachments/assets/4d687c63-647a-47a0-afba-9706517c2fc9" alt="Character Filters iOS" width="400"/>
+    <img src="https://github.com/user-attachments/assets/2329a9bc-7ec7-48cb-a895-f141e789a7b6" alt="Episode List iOS" width="400"/>
   </p>
-   <p>
-    <img src="https://github.com/user-attachments/assets/a5b22225-cef0-4bf5-959c-feb2a802eb01" alt="iOS Screenshot 3" width="400"/>
-    <img src="https://github.com/user-attachments/assets/de71289c-c9ff-45ce-af48-d2cbd77a4370" alt="iOS Screenshot 4" width="400"/>
+  <p>
+    <img src="https://github.com/user-attachments/assets/682d4471-8e18-4a3e-a3b8-2875aa31325f" alt="Episode Details iOS" width="400"/>
   </p>
 </details>
 
