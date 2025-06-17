@@ -22,6 +22,37 @@ Mobile application developed with React Native CLI. It allows users to explore c
 - **Theming**  
   Includes four switchable themes: `light`, `dark`, `portal`, and `multiverse`.
 
+<details>
+  <summary>📱 Android screenshots</summary>
+  <p>
+    <img src="https://github.com/user-attachments/assets/c218f6c8-8215-4833-b076-93338c68e479" alt="Character List" width="400"/>
+    <img src="https://github.com/user-attachments/assets/212cbbf6-fed8-4042-9d61-1df4cce8e11d" alt="Character Details" width="400"/>
+  </p>
+  <p>
+    <img src="https://github.com/user-attachments/assets/139fe2be-b2dc-4d18-90fe-198bf704316d" alt="Character Filters" width="400"/>
+    <img src="https://github.com/user-attachments/assets/14eac77a-a6a1-46f7-a59d-478e59411b13" alt="Episode List" width="400"/>
+  </p>
+  <p>
+    <img src="https://github.com/user-attachments/assets/cfc1c66e-15c3-437b-a13f-a1ff88a12080" alt="Episode Details" width="400"/>
+  </p>
+</details>
+
+<details>
+  <summary>📱 iOS screenshots</summary>
+  <p>
+    <img src="https://github.com/user-attachments/assets/9c2f536a-463c-46c0-9289-a2af504ec881" alt="iOS Screenshot 1" width="400"/>
+    <img src="https://github.com/user-attachments/assets/8d81ce98-8bff-4dfe-92ca-eec71279dee2" alt="iOS Screenshot 2" width="400"/>
+  </p>
+  <p>
+    <img src="https://github.com/user-attachments/assets/1d048793-c026-4789-bda5-a82007b3965f" alt="iOS Screenshot 3" width="400"/>
+    <img src="https://github.com/user-attachments/assets/a8c8cf8f-63a2-477f-a408-cd18ce9bbad3" alt="iOS Screenshot 4" width="400"/>
+  </p>
+   <p>
+    <img src="https://github.com/user-attachments/assets/a5b22225-cef0-4bf5-959c-feb2a802eb01" alt="iOS Screenshot 3" width="400"/>
+    <img src="https://github.com/user-attachments/assets/de71289c-c9ff-45ce-af48-d2cbd77a4370" alt="iOS Screenshot 4" width="400"/>
+  </p>
+</details>
+
 ## Technologies Used
 ### Core
 - [React Native](https://reactnative.dev/) `v0.79.3`
